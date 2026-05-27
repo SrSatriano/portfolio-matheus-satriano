@@ -12,8 +12,6 @@ import { motion } from "framer-motion";
 const GROUP_LABELS: Record<string, string> = {
   flagship: "LHN (principal)",
   oss: "Módulos OSS (30)",
-  lhn: "Família LHN",
-  trading: "MetaTrader / MQL5",
   archive: "Arquivo & estudos",
   portfolio: "Site",
 };
@@ -21,8 +19,6 @@ const GROUP_LABELS: Record<string, string> = {
 const GROUP_COLORS: Record<string, string> = {
   flagship: "#22c55e",
   oss: "#0ea5e9",
-  lhn: "#a78bfa",
-  trading: "#f97316",
   archive: "#64748b",
   portfolio: "#22d3ee",
 };
@@ -66,16 +62,13 @@ const LANG_COLORS: Record<string, string> = {
   Solidity: "#a78bfa",
   Shell: "#94a3b8",
   Java: "#ef4444",
-  MQL5: "#22c55e",
   Outros: "#64748b",
 };
 
 export function GitHubDashboard() {
   const stats = computeStats();
   const maxLang = Math.max(...stats.languages.map((l) => l.count), 1);
-  const otherRepos = publicRepos.filter(
-    (r) => !r.inPortfolio && r.group !== "meta" && r.group !== "portfolio"
-  );
+  const extraRepos = stats.extraPublicRepos;
 
   return (
     <section id="github" className="scroll-mt-28 border-y border-white/5 px-6 py-28">
@@ -88,9 +81,10 @@ export function GitHubDashboard() {
             O que está <span className="text-gradient">público</span>
           </h2>
           <p className="mt-6 max-w-2xl text-slate-300">
-            Além do LHN e dos 30 módulos, tenho repos de MQL5, coleções do
-            ecossistema e projetos mais antigos (Senac, IA financeira). Abaixo
-            é o retrato do perfil inteiro — números do GitHub em maio/2026.
+            Só entram aqui repositórios com visibilidade{" "}
+            <strong className="text-white">pública</strong> no GitHub — LHN, os
+            30 módulos, o site e quatro projetos mais antigos (Senac, primeiras
+            IAs).
           </p>
         </Reveal>
 
@@ -183,13 +177,13 @@ export function GitHubDashboard() {
         <Reveal delay={0.2}>
           <div className="mt-12">
             <h3 className="font-display text-xl font-semibold text-white">
-              Também no meu GitHub
+              Públicos fora dos 30 módulos
             </h3>
             <p className="mt-2 text-sm text-slate-400">
-              Não entram nos 30 módulos, mas fazem parte da minha trajetória.
+              Site do portfólio e projetos de estudo — também abertos no GitHub.
             </p>
             <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {otherRepos.map((repo) => (
+              {extraRepos.map((repo) => (
                 <a
                   key={repo.slug}
                   href={repoUrl(repo.slug)}
