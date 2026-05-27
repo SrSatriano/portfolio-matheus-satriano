@@ -64,6 +64,9 @@ export function repoUrl(slug: string) {
 export function computeStats() {
   const listed = publicRepos.filter((r) => r.group !== "meta");
   const portfolioCount = publicRepos.filter((r) => r.inPortfolio).length;
+  const siteAndProfile = publicRepos.filter(
+    (r) => r.group === "portfolio" || r.group === "meta"
+  ).length;
 
   const langMap = new Map<string, number>();
   for (const r of listed) {
@@ -78,9 +81,12 @@ export function computeStats() {
       pct: Math.round((count / listed.length) * 100),
     }));
 
-  const groupMap = new Map<RepoGroup, number>();
+  const groupMap = new Map<string, number>();
   for (const r of listed) {
     groupMap.set(r.group, (groupMap.get(r.group) ?? 0) + 1);
+  }
+  if (siteAndProfile > 0) {
+    groupMap.set("portfolio", siteAndProfile);
   }
 
   const tier1Slugs = new Set([
@@ -95,7 +101,7 @@ export function computeStats() {
   ]);
 
   return {
-    totalPublic: listed.length,
+    totalPublic: publicRepos.length,
     portfolioCount,
     flagship: "LHN-V90-IA",
     withTests: tier1Slugs.size,

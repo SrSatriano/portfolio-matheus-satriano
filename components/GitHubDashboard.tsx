@@ -10,10 +10,10 @@ import {
 import { motion } from "framer-motion";
 
 const GROUP_LABELS: Record<string, string> = {
-  flagship: "LHN (principal)",
-  oss: "Módulos OSS (30)",
+  flagship: "LHN Sovereign V90",
+  oss: "Módulos OSS",
   archive: "Arquivo & estudos",
-  portfolio: "Site",
+  portfolio: "Site & perfil",
 };
 
 const GROUP_COLORS: Record<string, string> = {
@@ -23,31 +23,83 @@ const GROUP_COLORS: Record<string, string> = {
   portfolio: "#22d3ee",
 };
 
-function DonutChart({
+const GROUP_ORDER = ["oss", "archive", "portfolio", "flagship"] as const;
+
+function RepoBreakdownChart({
   groups,
   total,
 }: {
   groups: { group: string; count: number }[];
   total: number;
 }) {
+  const sorted = [...groups].sort((a, b) => b.count - a.count);
   let acc = 0;
-  const stops = groups.map((g) => {
+  const segments = sorted.map((g) => {
+    const pct = (g.count / total) * 100;
     const start = (acc / total) * 360;
     acc += g.count;
     const end = (acc / total) * 360;
     const color = GROUP_COLORS[g.group] ?? "#64748b";
-    return `${color} ${start}deg ${end}deg`;
+    return { ...g, pct, start, end, color };
   });
 
+  const gradient = segments
+    .map((s) => `${s.color} ${s.start}deg ${s.end}deg`)
+    .join(", ");
+
   return (
-    <div
-      className="relative h-44 w-44 shrink-0 rounded-full"
-      style={{ background: `conic-gradient(${stops.join(", ")})` }}
-    >
-      <div className="absolute inset-4 flex flex-col items-center justify-center rounded-full bg-ink text-center">
-        <span className="font-display text-3xl font-bold text-white">{total}</span>
-        <span className="font-mono text-[10px] text-slate-500">repos</span>
+    <div className="flex flex-col items-center gap-10 lg:flex-row lg:items-center lg:justify-between">
+      <div className="relative shrink-0">
+        <div
+          className="h-52 w-52 rounded-full shadow-[0_0_60px_rgba(14,165,233,0.15)]"
+          style={{ background: `conic-gradient(${gradient})` }}
+        />
+        <div className="absolute inset-5 flex flex-col items-center justify-center rounded-full border border-white/10 bg-ink/95 text-center backdrop-blur-sm">
+          <span className="font-display text-4xl font-bold tabular-nums text-white">
+            {total}
+          </span>
+          <span className="mt-1 font-mono text-[11px] uppercase tracking-widest text-slate-500">
+            repos públicos
+          </span>
+        </div>
       </div>
+
+      <ul className="w-full max-w-md space-y-3">
+        {segments.map((s) => (
+          <li
+            key={s.group}
+            className="rounded-xl border border-white/5 bg-white/[0.03] px-4 py-3"
+          >
+            <div className="flex items-center justify-between gap-3">
+              <div className="flex min-w-0 items-center gap-3">
+                <span
+                  className="h-3 w-3 shrink-0 rounded-full ring-2 ring-white/10"
+                  style={{ backgroundColor: s.color }}
+                />
+                <span className="truncate text-sm text-slate-200">
+                  {GROUP_LABELS[s.group] ?? s.group}
+                </span>
+              </div>
+              <div className="shrink-0 text-right font-mono text-sm">
+                <span className="font-semibold text-white">{s.count}</span>
+                <span className="ml-2 text-slate-500">
+                  {Math.round(s.pct)}%
+                </span>
+              </div>
+            </div>
+            <div className="mt-2.5 h-1.5 overflow-hidden rounded-full bg-ink-100">
+              <motion.div
+                className="h-full rounded-full"
+                style={{ backgroundColor: s.color }}
+                initial={{ width: 0 }}
+                whileInView={{ width: `${s.pct}%` }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7, ease: "easeOut" }}
+              />
+            </div>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
@@ -69,6 +121,11 @@ export function GitHubDashboard() {
   const stats = computeStats();
   const maxLang = Math.max(...stats.languages.map((l) => l.count), 1);
   const extraRepos = stats.extraPublicRepos;
+
+  const chartGroups = GROUP_ORDER.map((key) => {
+    const found = stats.groups.find((g) => g.group === key);
+    return { group: key, count: found?.count ?? 0 };
+  }).filter((g) => g.count > 0);
 
   return (
     <section id="github" className="scroll-mt-28 border-y border-white/5 px-6 py-28">
@@ -103,7 +160,7 @@ export function GitHubDashboard() {
                 <p className="font-mono text-[10px] uppercase tracking-widest text-slate-500">
                   {card.label}
                 </p>
-                <p className="mt-2 font-display text-4xl font-bold text-white tabular-nums">
+                <p className="mt-2 font-display text-4xl font-bold tabular-nums text-white">
                   {card.value}
                 </p>
               </div>
@@ -111,8 +168,30 @@ export function GitHubDashboard() {
           </div>
         </Reveal>
 
+        <Reveal delay={0.12}>
+          <div className="card-glass mt-12 p-6 sm:p-10 backdrop-blur-xl">
+            <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+              <div>
+                <h3 className="font-display text-xl font-semibold text-white sm:text-2xl">
+                  Composição dos {stats.totalPublic} repositórios
+                </h3>
+                <p className="mt-2 text-sm text-slate-400">
+                  LHN, módulos OSS, site e arquivo — mesma visão do perfil
+                  GitHub.
+                </p>
+              </div>
+            </div>
+            <div className="mt-10">
+              <RepoBreakdownChart
+                groups={chartGroups}
+                total={stats.totalPublic}
+              />
+            </div>
+          </div>
+        </Reveal>
+
         <div className="mt-12 grid gap-8 lg:grid-cols-2">
-          <Reveal delay={0.12}>
+          <Reveal delay={0.16}>
             <div className="card-glass h-full p-6 sm:p-8 backdrop-blur-xl">
               <h3 className="font-display text-lg font-semibold text-white">
                 Linguagens nos repositórios
@@ -150,82 +229,44 @@ export function GitHubDashboard() {
             </div>
           </Reveal>
 
-          <Reveal delay={0.16}>
+          <Reveal delay={0.2}>
             <div className="card-glass h-full p-6 sm:p-8 backdrop-blur-xl">
               <h3 className="font-display text-lg font-semibold text-white">
-                Por tipo de repositório
+                Públicos fora dos 30 módulos
               </h3>
-              <div className="mt-8 flex flex-col items-center gap-8 sm:flex-row sm:justify-center">
-                <DonutChart groups={stats.groups} total={stats.totalPublic} />
-                <ul className="space-y-2 text-sm">
-                  {stats.groups.map((g) => (
-                    <li key={g.group} className="flex items-center gap-2">
-                      <span className="font-mono text-slate-400">
-                        {GROUP_LABELS[g.group] ?? g.group}
-                      </span>
-                      <span className="ml-auto font-semibold text-white">
-                        {g.count}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              <p className="mt-2 text-sm text-slate-400">
+                Site do portfólio e projetos de estudo — também abertos no
+                GitHub.
+              </p>
+              <ul className="mt-6 space-y-3">
+                {extraRepos.map((repo) => (
+                  <li key={repo.slug}>
+                    <a
+                      href={repoUrl(repo.slug)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group flex items-start justify-between gap-3 rounded-lg border border-white/5 bg-white/[0.02] px-4 py-3 transition hover:border-accent/30"
+                    >
+                      <div className="min-w-0">
+                        <p className="font-mono text-xs text-accent">
+                          {repo.language ?? "—"}
+                        </p>
+                        <p className="mt-1 truncate font-display text-sm font-semibold text-white group-hover:text-accent">
+                          {repo.slug}
+                        </p>
+                      </div>
+                      {repo.stars > 0 && (
+                        <span className="shrink-0 font-mono text-[10px] text-amber-400">
+                          ★ {repo.stars}
+                        </span>
+                      )}
+                    </a>
+                  </li>
+                ))}
+              </ul>
             </div>
           </Reveal>
         </div>
-
-        <Reveal delay={0.2}>
-          <div className="mt-12">
-            <h3 className="font-display text-xl font-semibold text-white">
-              Públicos fora dos 30 módulos
-            </h3>
-            <p className="mt-2 text-sm text-slate-400">
-              Site do portfólio e projetos de estudo — também abertos no GitHub.
-            </p>
-            <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {extraRepos.map((repo) => (
-                <a
-                  key={repo.slug}
-                  href={repoUrl(repo.slug)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="card-glass group block p-5 transition hover:border-accent/40 backdrop-blur-md"
-                >
-                  <div className="flex items-start justify-between gap-2">
-                    <span className="font-mono text-xs text-accent">
-                      {repo.language ?? "—"}
-                    </span>
-                    {repo.stars > 0 && (
-                      <span className="font-mono text-[10px] text-amber-400">
-                        ★ {repo.stars}
-                      </span>
-                    )}
-                  </div>
-                  <h4 className="mt-2 font-display font-semibold text-white group-hover:text-accent">
-                    {repo.slug}
-                  </h4>
-                  <p className="mt-2 text-sm text-slate-400 line-clamp-2">
-                    {repo.description}
-                  </p>
-                </a>
-              ))}
-            </div>
-          </div>
-        </Reveal>
-
-        <Reveal delay={0.24}>
-          <div className="mt-12 overflow-hidden rounded-2xl border border-white/10 bg-ink-50/50 p-4">
-            <p className="mb-4 text-center font-mono text-[10px] uppercase tracking-widest text-slate-500">
-              Atividade recente no GitHub
-            </p>
-            <img
-              src={`https://ghchart.rshah.org/${githubUsername}`}
-              alt="Gráfico de contribuições GitHub"
-              className="mx-auto w-full max-w-4xl rounded-lg opacity-90"
-              loading="lazy"
-            />
-          </div>
-        </Reveal>
       </div>
     </section>
   );
