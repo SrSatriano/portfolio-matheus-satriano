@@ -56,7 +56,7 @@ export function Hero() {
           className="mb-4 font-mono text-xs uppercase tracking-[0.4em] text-accent"
           {...itemProps}
         >
-          LHN Sovereign V90 · experiência cinematográfica
+          LHN Sovereign V90 · trading & back-end
         </motion.p>
 
         <motion.h1

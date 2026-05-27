@@ -90,7 +90,7 @@ export const profile = {
   name: "Matheus Rodrigues Satriano",
   role: "Desenvolvedor Back-End",
   headline: "HFT · Quant · IA local · Web3",
-  bio: "Graduando em Ciência da Computação. Autor do LHN Sovereign V90 (trading quant cripto) e de 30 módulos open source — documentação em português e escopo honesto por repositório.",
+  bio: "Graduando em Ciência da Computação. Construo o LHN Sovereign V90 para operar e estudar cripto na Bybit, e mantenho dezenas de repos abertos — cada um com README em português do jeito que eu uso no dia a dia.",
   email: "matheussatriano@hotmail.com",
   linkedin: "https://www.linkedin.com/in/matheus-rodrigues-satriano",
   github: "https://github.com/SrSatriano",
