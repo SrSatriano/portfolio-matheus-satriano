@@ -1,55 +1,37 @@
-# Portfólio — Matheus Rodrigues Satriano
+# Meu portfólio — Matheus Rodrigues Satriano
 
-Site pessoal em **Next.js 14** + **Tailwind** + **Framer Motion**: experiência **cinematográfica** com vídeos em loop, showreel interativo, grain de filme, scroll progress e animações.
+Site que eu fiz em **Next.js** para reunir o [LHN Sovereign V90](https://github.com/SrSatriano/LHN-V90-IA) e os [trinta repos](https://github.com/SrSatriano) que publico no GitHub.
 
-[LHN Sovereign V90](https://github.com/SrSatriano/LHN-V90-IA) + **30 módulos** [@SrSatriano](https://github.com/SrSatriano).
+**No ar:** [srsatriano.github.io/portfolio-matheus-satriano](https://srsatriano.github.io/portfolio-matheus-satriano/)
 
-**Online:** [srsatriano.github.io/portfolio-matheus-satriano](https://srsatriano.github.io/portfolio-matheus-satriano/)
-
----
-
-## Executar localmente
+## Rodar na minha máquina
 
 ```bash
 npm install
 npm run dev
 ```
 
-Abra [http://localhost:3000](http://localhost:3000) — em desenvolvimento não há `basePath`.
+Abre [http://localhost:3000](http://localhost:3000).
 
-## Build estático (igual ao GitHub Pages)
+## Build (igual ao GitHub Pages)
 
-```bash
-# Windows PowerShell
+```powershell
 $env:NODE_ENV = "production"
 npm run build
 ```
 
-A saída fica em `out/`. Em produção o `basePath` é `/portfolio-matheus-satriano`.
+Saída em `out/`.
 
-## Deploy — GitHub Pages
+## Onde edito
 
-O workflow [`.github/workflows/deploy-pages.yml`](.github/workflows/deploy-pages.yml) faz build e publica automaticamente no `main`.
+| Arquivo | O quê |
+|---------|--------|
+| `data/projects.ts` | Projetos, LHN, meus links |
+| `data/media.ts` | Vídeos e imagens de fundo |
+| `components/` | Páginas e blocos do site |
 
-1. Repositório: `SrSatriano/portfolio-matheus-satriano`
-2. **Settings → Pages → Build and deployment:** **GitHub Actions**
-3. Push em `main` ou dispare manualmente: **Actions → Deploy GitHub Pages → Run workflow**
+## Deploy
 
-URL pública: `https://srsatriano.github.io/portfolio-matheus-satriano/`
-
-## Deploy alternativo (Vercel)
-
-Importe o repositório em [vercel.com/new](https://vercel.com/new). Para subpath na Vercel, ajuste `basePath` em `next.config.mjs` ou use domínio próprio na raiz.
-
-## Personalizar
-
-| Arquivo | Conteúdo |
-|---------|----------|
-| `data/projects.ts` | Projetos, LHN, links e perfil |
-| `data/media.ts` | URLs dos vídeos (troque por gravações em `public/videos/`) |
-| `components/cinematic/` | Vídeo, grain, reveal, scroll progress |
-| `components/Showreel.tsx` | Três cenas interativas |
-
-## Licença
+Push na `main` dispara o workflow de GitHub Pages (`.github/workflows/deploy-pages.yml`).
 
 MIT © Matheus Rodrigues Satriano

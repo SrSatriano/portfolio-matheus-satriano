@@ -8,7 +8,7 @@ export function Footer() {
           © {new Date().getFullYear()} {profile.name}
         </p>
         <p className="text-center text-xs text-slate-600 sm:text-right">
-          Construído com Next.js · Documentação honesta ·{" "}
+          Feito por mim com Next.js · Docs em{" "}
           <span className="text-accent">pt-BR</span>
         </p>
       </div>

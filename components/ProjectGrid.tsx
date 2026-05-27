@@ -43,8 +43,8 @@ export function ProjectGrid() {
             Portfólio <span className="text-gradient">open source</span>
           </h2>
           <p className="mt-6 max-w-2xl text-slate-400">
-            Documentação em português em cada repositório. O nível de código
-            implementado varia — consulte README e roadmap.
+            Repositórios que eu mantenho no GitHub. Cada um tem README em
+            português — abre o que interessar e vê lá o estado real do código.
           </p>
         </Reveal>
 

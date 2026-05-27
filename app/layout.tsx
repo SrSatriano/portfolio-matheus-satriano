@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     "Desenvolvedor back-end · HFT, quant, IA local e Web3. LHN Sovereign V90 e 30 projetos open source.",
   openGraph: {
     title: "Matheus Rodrigues Satriano — Portfólio",
-    description: "Experiência cinematográfica · HFT · IA · Web3",
+    description: "Portfólio de Matheus Rodrigues Satriano — HFT, IA local e Web3",
     type: "website",
     url: "https://srsatriano.github.io/portfolio-matheus-satriano/",
   },

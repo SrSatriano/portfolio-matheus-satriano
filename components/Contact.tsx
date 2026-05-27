@@ -11,7 +11,7 @@ export function Contact() {
     {
       label: "Portfólio web",
       href: profile.portfolioUrl,
-      desc: "Experiência cinematográfica",
+      desc: "Este site",
     },
     { label: "GitHub", href: profile.github, desc: "LHN V90 + 30 módulos" },
     { label: "LinkedIn", href: profile.linkedin, desc: "Perfil profissional" },

@@ -123,12 +123,12 @@ export function Showreel() {
             Cena 00 — Showreel
           </p>
           <h2 className="mt-4 font-display text-3xl font-bold text-white sm:text-5xl">
-            Três mundos,{" "}
-            <span className="text-gradient">um ecossistema</span>
+            Três frentes do{" "}
+            <span className="text-gradient">mesmo trabalho</span>
           </h2>
           <p className="mt-4 max-w-2xl text-slate-300">
-            Passe o mouse ou toque nos painéis para destacar cada cena. Cada
-            painel traz imagem de fundo e vídeo em loop quando disponível.
+            Mercado, IA e infra — passa o mouse nos painéis para ver cada uma em
+            destaque.
           </p>
         </Reveal>
 

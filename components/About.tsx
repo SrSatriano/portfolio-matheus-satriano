@@ -47,13 +47,14 @@ export function About() {
             Cena 02 — Sobre
           </p>
           <h2 className="mt-4 font-display text-3xl font-bold text-white sm:text-5xl">
-            Engenharia com{" "}
-            <span className="text-gradient">contexto de mercado</span>
+            O que eu{" "}
+            <span className="text-gradient">costumo construir</span>
           </h2>
           <p className="mt-6 max-w-2xl text-slate-300 leading-relaxed">
-            Graduando em Ciência da Computação. Construo back-end, sistemas para
-            mercados e IA com documentação em português — código que você clona,
-            testa e opera com transparência sobre o que já está implementado.
+            Faço Ciência da Computação e vivo de back-end: mercado, latência,
+            IA rodando local. Documento em português porque é assim que eu
+            reviso — e deixo no README o que já está pronto e o que ainda vou
+            codar.
           </p>
         </Reveal>
 
