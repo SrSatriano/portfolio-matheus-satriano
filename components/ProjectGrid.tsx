@@ -42,8 +42,8 @@ export function ProjectGrid() {
               Portfólio open source
             </h2>
             <p className="mt-4 text-slate-400">
-              Cada repositório inclui README, arquitetura, deploy e operação em
-              português brasileiro.
+              Documentação em português em cada repositório. O nível de código
+              implementado varia — consulte o README e o roadmap de cada um.
             </p>
           </div>
         </div>
