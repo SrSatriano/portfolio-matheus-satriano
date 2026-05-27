@@ -10,24 +10,30 @@ import { useMemo, useState } from "react";
 import { ProjectCard } from "./ProjectCard";
 import { motion } from "framer-motion";
 
-const filters: Array<"all" | Category> = [
-  "all",
-  "hft",
-  "ai",
-  "web3",
-  "product",
-  "infra",
+type GridFilter = "all" | Category | "demo";
+
+const filters: Array<{ key: GridFilter; label: string }> = [
+  { key: "all", label: "Todos" },
+  { key: "demo", label: "Com demo" },
+  { key: "hft", label: CATEGORY_LABELS.hft },
+  { key: "ai", label: CATEGORY_LABELS.ai },
+  { key: "web3", label: CATEGORY_LABELS.web3 },
+  { key: "product", label: CATEGORY_LABELS.product },
+  { key: "infra", label: CATEGORY_LABELS.infra },
 ];
 
 export function ProjectGrid() {
-  const [filter, setFilter] = useState<"all" | Category>("all");
+  const [filter, setFilter] = useState<GridFilter>("all");
   const featured = projects.filter((p) => p.featured);
+  const demoCount = projects.filter((p) => p.demoReady).length;
 
   const filtered = useMemo(() => {
-    const list =
-      filter === "all"
-        ? projects
-        : projects.filter((p) => p.category === filter);
+    let list = projects;
+    if (filter === "demo") {
+      list = projects.filter((p) => p.demoReady);
+    } else if (filter !== "all") {
+      list = projects.filter((p) => p.category === filter);
+    }
     if (filter === "all") return list.filter((p) => !p.featured);
     return list;
   }, [filter]);
@@ -44,7 +50,11 @@ export function ProjectGrid() {
           </h2>
           <p className="mt-6 max-w-2xl text-slate-400">
             Repositórios que eu mantenho no GitHub. Cada um tem README em
-            português — abre o que interessar e vê lá o estado real do código.
+            português — abre o que interessar e vê lá o estado real do código.{" "}
+            <span className="text-slate-300">
+              {demoCount} módulos com núcleo e testes automatizados prontos para
+              clonar.
+            </span>
           </p>
         </Reveal>
 
@@ -65,16 +75,16 @@ export function ProjectGrid() {
           <div className="mt-12 flex flex-wrap gap-2">
             {filters.map((f) => (
               <button
-                key={f}
+                key={f.key}
                 type="button"
-                onClick={() => setFilter(f)}
+                onClick={() => setFilter(f.key)}
                 className={`rounded-full px-4 py-2 font-mono text-xs transition-all duration-300 ${
-                  filter === f
+                  filter === f.key
                     ? "bg-accent text-ink font-semibold shadow-[0_0_24px_rgba(34,211,238,0.35)]"
                     : "border border-white/10 text-slate-400 hover:border-accent/40 hover:text-white"
                 }`}
               >
-                {f === "all" ? "Todos" : CATEGORY_LABELS[f]}
+                {f.label}
               </button>
             ))}
           </div>
