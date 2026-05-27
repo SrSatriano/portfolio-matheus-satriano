@@ -1,6 +1,8 @@
 # Portfólio — Matheus Rodrigues Satriano
 
-Site pessoal em **Next.js 14** + **Tailwind CSS**: [LHN Sovereign V90](https://github.com/SrSatriano/LHN-V90-IA) e os **30 módulos** open source [@SrSatriano](https://github.com/SrSatriano).
+Site pessoal em **Next.js 14** + **Tailwind** + **Framer Motion**: experiência **cinematográfica** com vídeos em loop, showreel interativo, grain de filme, scroll progress e animações.
+
+[LHN Sovereign V90](https://github.com/SrSatriano/LHN-V90-IA) + **30 módulos** [@SrSatriano](https://github.com/SrSatriano).
 
 **Online:** [srsatriano.github.io/portfolio-matheus-satriano](https://srsatriano.github.io/portfolio-matheus-satriano/)
 
@@ -44,8 +46,9 @@ Importe o repositório em [vercel.com/new](https://vercel.com/new). Para subpath
 | Arquivo | Conteúdo |
 |---------|----------|
 | `data/projects.ts` | Projetos, LHN, links e perfil |
-| `tailwind.config.ts` | Cores e tema |
-| `app/globals.css` | Estilos globais |
+| `data/media.ts` | URLs dos vídeos (troque por gravações em `public/videos/`) |
+| `components/cinematic/` | Vídeo, grain, reveal, scroll progress |
+| `components/Showreel.tsx` | Três cenas interativas |
 
 ## Licença
 

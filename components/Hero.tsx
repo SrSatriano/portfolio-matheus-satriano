@@ -1,87 +1,119 @@
+"use client";
+
+import { VideoLayer } from "@/components/cinematic/VideoLayer";
+import { MagneticLink } from "@/components/cinematic/MagneticLink";
+import { cinematicVideos } from "@/data/media";
 import { profile, projects } from "@/data/projects";
+import { motion } from "framer-motion";
+import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
+
+const stagger = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.12, delayChildren: 0.2 } },
+};
+
+const item = {
+  hidden: { opacity: 0, y: 28, filter: "blur(6px)" },
+  visible: {
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] as const },
+  },
+};
 
 export function Hero() {
+  const reduced = usePrefersReducedMotion();
+  const Container = reduced ? "div" : motion.div;
+  const containerProps = reduced
+    ? {}
+    : { variants: stagger, initial: "hidden", animate: "visible" };
+  const itemProps = reduced ? {} : { variants: item };
+
   return (
-    <section className="relative flex min-h-[92vh] flex-col justify-center px-6 pt-28 pb-20">
-      <div className="pointer-events-none absolute right-0 top-32 h-72 w-72 rounded-full bg-accent/20 blur-[100px] animate-float" />
-      <div className="pointer-events-none absolute left-10 bottom-20 h-48 w-48 rounded-full bg-mint/10 blur-[80px]" />
+    <section className="relative flex min-h-screen flex-col justify-center overflow-hidden">
+      <VideoLayer
+        src={cinematicVideos.hero.src}
+        poster={cinematicVideos.hero.poster}
+        overlay="hero"
+        priority
+      />
 
-      <div className="mx-auto w-full max-w-6xl">
-        <p
-          className="mb-4 font-mono text-xs uppercase tracking-[0.35em] text-accent opacity-0 animate-fade-up"
-          style={{ animationDelay: "0.1s" }}
+      <div className="letterbox-top" aria-hidden />
+      <div className="letterbox-bottom" aria-hidden />
+
+      <Container
+        className="relative z-10 mx-auto w-full max-w-6xl px-6 pt-32 pb-24"
+        {...containerProps}
+      >
+        <motion.p
+          className="mb-4 font-mono text-xs uppercase tracking-[0.4em] text-accent"
+          {...itemProps}
         >
-          LHN Sovereign V90 · Portfólio open source
-        </p>
+          LHN Sovereign V90 · experiência cinematográfica
+        </motion.p>
 
-        <h1
-          className="font-display text-4xl font-bold leading-[1.1] text-white opacity-0 animate-fade-up sm:text-6xl lg:text-7xl"
-          style={{ animationDelay: "0.2s" }}
+        <motion.h1
+          className="font-display text-4xl font-bold leading-[1.05] text-white sm:text-6xl lg:text-8xl"
+          {...itemProps}
         >
           {profile.name.split(" ").slice(0, 2).join(" ")}
           <br />
-          <span className="text-gradient">
+          <span className="text-gradient cinematic-glow">
             {profile.name.split(" ").slice(2).join(" ")}
           </span>
-        </h1>
+        </motion.h1>
 
-        <p
-          className="mt-6 max-w-2xl text-lg text-slate-400 opacity-0 animate-fade-up sm:text-xl"
-          style={{ animationDelay: "0.35s" }}
+        <motion.p
+          className="mt-8 max-w-2xl text-lg text-slate-300 sm:text-xl"
+          {...itemProps}
         >
-          <span className="text-white">{profile.role}</span> — {profile.headline}
-        </p>
+          <span className="text-white">{profile.role}</span>
+          <span className="text-slate-500"> — </span>
+          {profile.headline}
+        </motion.p>
 
-        <p
-          className="mt-4 max-w-xl text-base leading-relaxed text-slate-500 opacity-0 animate-fade-up"
-          style={{ animationDelay: "0.45s" }}
+        <motion.p
+          className="mt-4 max-w-xl text-base leading-relaxed text-slate-500"
+          {...itemProps}
         >
           {profile.bio}
-        </p>
+        </motion.p>
 
-        <div
-          className="mt-10 flex flex-wrap gap-4 opacity-0 animate-fade-up"
-          style={{ animationDelay: "0.55s" }}
+        <motion.div
+          className="mt-12 flex flex-wrap gap-4"
+          {...itemProps}
         >
-          <a
+          <MagneticLink
             href="#lhn-v90"
-            className="glow-ring rounded-full bg-accent px-6 py-3 font-display text-sm font-semibold text-ink transition hover:bg-accent-glow"
+            className="glow-ring rounded-full bg-accent px-7 py-3.5 font-display text-sm font-semibold text-ink"
           >
             LHN Sovereign V90
-          </a>
-          <a
+          </MagneticLink>
+          <MagneticLink
+            href="#showreel"
+            className="rounded-full border border-white/25 bg-white/5 px-7 py-3.5 text-sm text-white backdrop-blur-sm"
+          >
+            Ver showreel
+          </MagneticLink>
+          <MagneticLink
             href="#projetos"
-            className="rounded-full border border-white/20 px-6 py-3 text-sm text-slate-300 transition hover:border-accent/50 hover:text-white"
+            className="rounded-full border border-white/20 px-7 py-3.5 text-sm text-slate-300 hover:text-white"
           >
             +{projects.length} projetos
-          </a>
-          <a
-            href={profile.portfolioUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="rounded-full border border-mint/30 px-6 py-3 text-sm text-mint transition hover:bg-mint/10"
-          >
-            Site publicado
-          </a>
-          <a
+          </MagneticLink>
+          <MagneticLink
             href={profile.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="rounded-full border border-white/20 px-6 py-3 text-sm text-slate-300 transition hover:border-accent/50 hover:text-white"
+            external
+            className="rounded-full border border-white/20 px-7 py-3.5 text-sm text-slate-300"
           >
             LinkedIn
-          </a>
-          <a
-            href={`mailto:${profile.email}`}
-            className="rounded-full border border-white/20 px-6 py-3 text-sm text-slate-300 transition hover:border-accent/50 hover:text-white"
-          >
-            E-mail
-          </a>
-        </div>
+          </MagneticLink>
+        </motion.div>
 
-        <dl
-          className="mt-16 grid grid-cols-2 gap-6 border-t border-white/10 pt-10 sm:grid-cols-4 opacity-0 animate-fade-up"
-          style={{ animationDelay: "0.65s" }}
+        <motion.dl
+          className="mt-20 grid grid-cols-2 gap-8 border-t border-white/10 pt-12 sm:grid-cols-4"
+          {...itemProps}
         >
           {[
             { label: "Sistema HFT", value: "V90" },
@@ -90,16 +122,34 @@ export function Hero() {
             { label: "Exchange", value: "Bybit" },
           ].map((s) => (
             <div key={s.label}>
-              <dt className="font-mono text-xs uppercase tracking-wider text-slate-500">
+              <dt className="font-mono text-[10px] uppercase tracking-[0.2em] text-slate-500">
                 {s.label}
               </dt>
-              <dd className="font-display mt-1 text-3xl font-bold text-white">
+              <dd className="font-display mt-2 text-4xl font-bold text-white tabular-nums">
                 {s.value}
               </dd>
             </div>
           ))}
-        </dl>
-      </div>
+        </motion.dl>
+
+        <motion.div
+          className="mt-16 flex justify-center"
+          {...itemProps}
+        >
+          <a
+            href="#showreel"
+            className="flex flex-col items-center gap-2 text-slate-500 transition hover:text-accent"
+            aria-label="Rolar para o showreel"
+          >
+            <span className="font-mono text-[10px] uppercase tracking-[0.3em]">
+              Scroll
+            </span>
+            <span className="scroll-cue h-10 w-6 rounded-full border border-white/20 p-1">
+              <span className="block h-2 w-1 rounded-full bg-accent mx-auto animate-scroll-cue" />
+            </span>
+          </a>
+        </motion.div>
+      </Container>
     </section>
   );
 }

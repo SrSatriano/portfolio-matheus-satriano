@@ -5,8 +5,10 @@ import {
   type Category,
   projects,
 } from "@/data/projects";
+import { Reveal } from "@/components/cinematic/Reveal";
 import { useMemo, useState } from "react";
 import { ProjectCard } from "./ProjectCard";
+import { motion } from "framer-motion";
 
 const filters: Array<"all" | Category> = [
   "all",
@@ -31,57 +33,68 @@ export function ProjectGrid() {
   }, [filter]);
 
   return (
-    <section id="projetos" className="scroll-mt-24 px-6 py-24">
+    <section id="projetos" className="scroll-mt-24 px-6 py-28">
       <div className="mx-auto max-w-6xl">
-        <div className="mb-12 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
-          <div className="max-w-2xl">
-            <p className="font-mono text-xs uppercase tracking-[0.3em] text-accent">
-              02 — Projetos
-            </p>
-            <h2 className="mt-3 font-display text-3xl font-bold text-white sm:text-4xl">
-              Portfólio open source
-            </h2>
-            <p className="mt-4 text-slate-400">
-              Documentação em português em cada repositório. O nível de código
-              implementado varia — consulte o README e o roadmap de cada um.
-            </p>
-          </div>
-        </div>
+        <Reveal>
+          <p className="font-mono text-xs uppercase tracking-[0.35em] text-accent">
+            Cena 03 — Projetos
+          </p>
+          <h2 className="mt-4 font-display text-3xl font-bold text-white sm:text-5xl">
+            Portfólio <span className="text-gradient">open source</span>
+          </h2>
+          <p className="mt-6 max-w-2xl text-slate-400">
+            Documentação em português em cada repositório. O nível de código
+            implementado varia — consulte README e roadmap.
+          </p>
+        </Reveal>
 
-        <div className="mb-10">
-          <p className="mb-4 font-mono text-xs text-slate-500">Em destaque</p>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {featured.map((p) => (
-              <ProjectCard key={p.id} project={p} />
+        <Reveal delay={0.1}>
+          <div className="mt-14">
+            <p className="mb-5 font-mono text-[10px] uppercase tracking-[0.25em] text-slate-500">
+              Em destaque
+            </p>
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {featured.map((p) => (
+                <ProjectCard key={p.id} project={p} />
+              ))}
+            </div>
+          </div>
+        </Reveal>
+
+        <Reveal delay={0.15}>
+          <div className="mt-12 flex flex-wrap gap-2">
+            {filters.map((f) => (
+              <button
+                key={f}
+                type="button"
+                onClick={() => setFilter(f)}
+                className={`rounded-full px-4 py-2 font-mono text-xs transition-all duration-300 ${
+                  filter === f
+                    ? "bg-accent text-ink font-semibold shadow-[0_0_24px_rgba(34,211,238,0.35)]"
+                    : "border border-white/10 text-slate-400 hover:border-accent/40 hover:text-white"
+                }`}
+              >
+                {f === "all" ? "Todos" : CATEGORY_LABELS[f]}
+              </button>
             ))}
           </div>
-        </div>
+        </Reveal>
 
-        <div className="mb-6 flex flex-wrap gap-2">
-          {filters.map((f) => (
-            <button
-              key={f}
-              type="button"
-              onClick={() => setFilter(f)}
-              className={`rounded-full px-4 py-2 font-mono text-xs transition ${
-                filter === f
-                  ? "bg-accent text-ink font-semibold"
-                  : "border border-white/10 text-slate-400 hover:border-accent/40 hover:text-white"
-              }`}
-            >
-              {f === "all" ? "Todos" : CATEGORY_LABELS[f]}
-            </button>
-          ))}
-        </div>
-
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <motion.div
+          className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+          layout
+          key={filter}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.35 }}
+        >
           {filtered.map((p) => (
             <ProjectCard key={p.id} project={p} />
           ))}
-        </div>
+        </motion.div>
 
-        <p className="mt-10 text-center font-mono text-xs text-slate-500">
-          {filtered.length} de {projects.length} projetos exibidos
+        <p className="mt-12 text-center font-mono text-xs text-slate-600">
+          {filtered.length} de {projects.length} módulos nesta vista
         </p>
       </div>
     </section>

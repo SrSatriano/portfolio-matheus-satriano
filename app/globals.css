@@ -3,7 +3,8 @@
 @tailwind utilities;
 
 :root {
-  --grid-color: rgba(34, 211, 238, 0.06);
+  --grid-color: rgba(34, 211, 238, 0.04);
+  --cinema-gold: #fbbf24;
 }
 
 html {
@@ -11,12 +12,20 @@ html {
 }
 
 body {
-  @apply bg-ink text-slate-200 antialiased;
+  @apply bg-ink text-slate-200 antialiased overflow-x-hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
   background-image:
-    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(34, 211, 238, 0.15), transparent),
+    radial-gradient(ellipse 60% 40% at 50% 0%, rgba(34, 211, 238, 0.08), transparent),
     linear-gradient(var(--grid-color) 1px, transparent 1px),
     linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
-  background-size: 100% 100%, 48px 48px, 48px 48px;
+  background-size: 100% 100%, 64px 64px, 64px 64px;
 }
 
 ::selection {
@@ -28,13 +37,51 @@ body {
     @apply bg-gradient-to-r from-accent-glow via-accent to-mint bg-clip-text text-transparent;
   }
 
+  .cinematic-glow {
+    text-shadow: 0 0 60px rgba(34, 211, 238, 0.35);
+  }
+
   .card-glass {
-    @apply rounded-2xl border border-white/10 bg-ink-50/80 backdrop-blur-md;
+    @apply rounded-2xl border border-white/10 bg-ink-50/70 backdrop-blur-xl;
   }
 
   .glow-ring {
     box-shadow:
-      0 0 0 1px rgba(34, 211, 238, 0.2),
-      0 0 40px -10px rgba(34, 211, 238, 0.35);
+      0 0 0 1px rgba(34, 211, 238, 0.25),
+      0 0 48px -12px rgba(34, 211, 238, 0.4);
+  }
+
+  .letterbox-top,
+  .letterbox-bottom {
+    @apply pointer-events-none absolute left-0 right-0 z-[5] h-16 sm:h-24;
+    background: linear-gradient(to bottom, #060a12 0%, transparent 100%);
+  }
+
+  .letterbox-top {
+    top: 0;
+  }
+
+  .letterbox-bottom {
+    bottom: 0;
+    background: linear-gradient(to top, #060a12 0%, transparent 100%);
+  }
+
+  .film-grain {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    animation: grain 0.5s steps(2) infinite;
+  }
+
+  .scroll-cue {
+    @apply flex items-start justify-center;
+  }
+}
+
+@keyframes grain {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(-2%, -2%);
   }
 }

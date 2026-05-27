@@ -5,6 +5,7 @@ import { Footer } from "@/components/Footer";
 import { Hero } from "@/components/Hero";
 import { Nav } from "@/components/Nav";
 import { ProjectGrid } from "@/components/ProjectGrid";
+import { Showreel } from "@/components/Showreel";
 import { Stack } from "@/components/Stack";
 
 export default function Home() {
@@ -13,6 +14,7 @@ export default function Home() {
       <Nav />
       <main>
         <Hero />
+        <Showreel />
         <FlagshipLHN />
         <About />
         <ProjectGrid />
