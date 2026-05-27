@@ -18,6 +18,7 @@ export function Contact() {
     { label: "Google Developers", href: profile.gdev, desc: "g.dev/satriano" },
     { label: "E-mail", href: `mailto:${profile.email}`, desc: profile.email },
   ];
+  const topics = ["Back-end", "Quant/dev", "IA local", "Infra", "Open source"];
 
   return (
     <section
@@ -40,12 +41,22 @@ export function Contact() {
                 Colaborações, oportunidades e discussões sobre HFT, IA local,
                 Web3 ou produtos para o mercado brasileiro.
               </p>
+              <div className="mt-6 flex flex-wrap gap-2">
+                {topics.map((topic) => (
+                  <span
+                    key={topic}
+                    className="rounded-full border border-white/10 bg-white/[0.03] px-3 py-1.5 font-mono text-[10px] uppercase tracking-wider text-slate-300"
+                  >
+                    {topic}
+                  </span>
+                ))}
+              </div>
               <MagneticLink
                 href={profile.buymeacoffee}
                 external
                 className="mt-8 inline-block text-sm text-accent underline decoration-accent/40 underline-offset-4"
               >
-                Apoiar o portfólio open source ☕
+                Apoiar o portfólio open source
               </MagneticLink>
             </div>
 

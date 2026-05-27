@@ -45,6 +45,17 @@ export function FlagshipLHN() {
                 {flagshipLHN.tagline}
               </p>
 
+              <div className="mt-8 flex flex-wrap gap-2">
+                {flagshipLHN.stack.slice(0, 6).map((tool) => (
+                  <span
+                    key={tool}
+                    className="rounded-md border border-white/10 bg-ink/55 px-2.5 py-1.5 font-mono text-[10px] text-slate-300"
+                  >
+                    {tool}
+                  </span>
+                ))}
+              </div>
+
               <div className="mt-10 flex flex-wrap gap-3">
                 <MagneticLink
                   href={flagshipLHN.url}
@@ -76,6 +87,16 @@ export function FlagshipLHN() {
                   </dd>
                 </div>
               </dl>
+
+              <div className="mt-6 border-l border-mint/40 pl-5">
+                <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-mint">
+                  operador no controle
+                </p>
+                <p className="mt-2 text-sm leading-relaxed text-slate-400">
+                  A arquitetura privilegia execução local, leitura de risco e
+                  auditoria do fluxo antes de qualquer automação agressiva.
+                </p>
+              </div>
             </Reveal>
 
             <Reveal delay={0.15}>
