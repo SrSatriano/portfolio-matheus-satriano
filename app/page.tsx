@@ -2,6 +2,7 @@ import { About } from "@/components/About";
 import { FlagshipLHN } from "@/components/FlagshipLHN";
 import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
+import { GitHubDashboard } from "@/components/GitHubDashboard";
 import { Hero } from "@/components/Hero";
 import { Nav } from "@/components/Nav";
 import { ProjectGrid } from "@/components/ProjectGrid";
@@ -16,6 +17,7 @@ export default function Home() {
         <Hero />
         <Showreel />
         <FlagshipLHN />
+        <GitHubDashboard />
         <About />
         <ProjectGrid />
         <Stack />
