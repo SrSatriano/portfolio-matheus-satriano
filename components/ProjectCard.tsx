@@ -79,7 +79,7 @@ export function ProjectCard({ project }: { project: Project }) {
         href={githubUrl(project.slug)}
         target="_blank"
         rel="noopener noreferrer"
-        className="mt-6 inline-flex items-center justify-between gap-2 rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 font-mono text-xs text-accent transition hover:border-accent/40 hover:bg-accent/10 hover:text-accent-glow"
+        className="mt-6 inline-flex items-center justify-between gap-2 rounded-lg border border-white/10 bg-white/[0.03] px-4 py-3 font-mono text-xs text-accent transition hover:border-accent/40 hover:bg-accent/10 hover:text-accent-glow"
         aria-label={`Abrir ${project.title} no GitHub`}
       >
         <span>Ver no GitHub</span>

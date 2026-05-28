@@ -68,7 +68,7 @@ function RepoBreakdownChart({
         {segments.map((s) => (
           <li
             key={s.group}
-            className="rounded-xl border border-white/5 bg-white/[0.03] px-4 py-3"
+            className="rounded-lg border border-white/5 bg-white/[0.03] px-4 py-3"
           >
             <div className="flex items-center justify-between gap-3">
               <div className="flex min-w-0 items-center gap-3">

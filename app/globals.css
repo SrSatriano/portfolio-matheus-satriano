@@ -28,6 +28,18 @@ body::before {
   background-size: 100% 100%, 64px 64px, 64px 64px;
 }
 
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px) 50% 0 / 320px 100%,
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.018) 0 1px, transparent 1px 6px);
+  mask-image: linear-gradient(to bottom, transparent, black 14%, black 86%, transparent);
+}
+
 ::selection {
   @apply bg-accent/30 text-white;
 }
@@ -42,7 +54,7 @@ body::before {
   }
 
   .card-glass {
-    @apply rounded-2xl border border-white/10 bg-ink-50/70 backdrop-blur-xl;
+    @apply rounded-lg border border-white/10 bg-ink-50/70 backdrop-blur-xl;
   }
 
   .glow-ring {
@@ -84,6 +96,34 @@ body::before {
 
   .hero-readable {
     isolation: isolate;
+  }
+
+  .cinematic-plate {
+    background:
+      linear-gradient(115deg, rgba(34, 211, 238, 0.1), transparent 24%),
+      linear-gradient(295deg, rgba(52, 211, 153, 0.08), transparent 34%),
+      repeating-linear-gradient(90deg, transparent 0 58px, rgba(255, 255, 255, 0.035) 58px 59px),
+      linear-gradient(180deg, #050812 0%, #08111d 46%, #060a12 100%);
+  }
+
+  .dossier-grid {
+    background-image:
+      linear-gradient(rgba(34, 211, 238, 0.055) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(34, 211, 238, 0.055) 1px, transparent 1px);
+    background-size: 72px 72px;
+    mask-image: linear-gradient(to right, black, transparent 78%);
+  }
+
+  .section-rule {
+    @apply border-y border-white/10;
+    background:
+      linear-gradient(90deg, transparent, rgba(34, 211, 238, 0.16), transparent) top / 100% 1px no-repeat,
+      linear-gradient(90deg, transparent, rgba(52, 211, 153, 0.12), transparent) bottom / 100% 1px no-repeat;
+  }
+
+  .dossier-panel {
+    @apply border border-white/10 bg-ink-50/60 backdrop-blur-xl;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
   }
 }
 

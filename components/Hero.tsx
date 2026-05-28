@@ -1,39 +1,37 @@
 "use client";
 
-import { VideoLayer } from "@/components/cinematic/VideoLayer";
+import { CinematicField } from "@/components/cinematic/CinematicField";
 import { MagneticLink } from "@/components/cinematic/MagneticLink";
-import { cinematicVideos } from "@/data/media";
+import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 import { profile, projects } from "@/data/projects";
 import { motion } from "framer-motion";
-import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 
 const stagger = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.12, delayChildren: 0.2 } },
+  visible: { transition: { staggerChildren: 0.1, delayChildren: 0.15 } },
 };
 
 const item = {
-  hidden: { opacity: 0, y: 28, filter: "blur(6px)" },
+  hidden: { opacity: 0, y: 24, filter: "blur(6px)" },
   visible: {
     opacity: 1,
     y: 0,
     filter: "blur(0px)",
-    transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] as const },
+    transition: { duration: 0.82, ease: [0.22, 1, 0.36, 1] as const },
   },
 };
 
-const consoleRows = [
-  { label: "core", value: "LHN Sovereign V90" },
-  { label: "runtime", value: "local-first" },
-  { label: "risk", value: "drawdown guard" },
-  { label: "docs", value: "pt-BR" },
+const readouts = [
+  { label: "foco", value: "low latency" },
+  { label: "modelo", value: "local-first" },
+  { label: "surface", value: "back-end + produto" },
+  { label: "arquivo", value: "30 módulos OSS" },
 ];
 
-const executionQueue = [
-  "Order book C++ e matching mensurável",
-  "Pricing AVX-512 com benchmark scalar vs SIMD",
-  "RAG offline para dados sensíveis",
-  "Painéis Next.js/FastAPI que eu mesmo opero",
+const dossier = [
+  "Engenharia de sistemas para mercado, risco e inferência local.",
+  "Arquiteturas que cabem em workstation antes de depender de nuvem.",
+  "READMEs em português, demos rastreáveis e código organizado por tier.",
 ];
 
 export function Hero() {
@@ -46,60 +44,49 @@ export function Hero() {
 
   return (
     <section className="relative flex min-h-screen flex-col justify-center overflow-hidden">
-      <VideoLayer
-        src={cinematicVideos.hero.src}
-        poster={cinematicVideos.hero.poster}
-        overlay="hero"
-        priority
+      <CinematicField variant="hero" />
+      <div
+        className="absolute inset-0 z-[1] bg-cover bg-center opacity-50 mix-blend-screen saturate-[0.85]"
+        style={{ backgroundImage: "url('images/quant-workstation-hero.png')" }}
+        aria-hidden
       />
-
+      <div className="absolute inset-0 z-[2] bg-[linear-gradient(90deg,#060a12_0%,rgba(6,10,18,.92)_34%,rgba(6,10,18,.58)_68%,rgba(6,10,18,.86)_100%)]" aria-hidden />
       <div className="letterbox-top" aria-hidden />
       <div className="letterbox-bottom" aria-hidden />
 
-      {/* Área de leitura: scrim dedicado atrás do texto */}
-      <div
-        className="pointer-events-none absolute inset-y-0 left-0 z-[5] w-full max-w-4xl bg-gradient-to-r from-ink/95 via-ink/75 to-transparent sm:w-[85%]"
-        aria-hidden
-      />
-
       <Container
-        className="hero-readable relative z-10 mx-auto w-full max-w-6xl px-6 pt-28 pb-20 lg:pb-16"
+        className="hero-readable relative z-10 mx-auto w-full max-w-7xl px-6 pb-20 pt-28 lg:pb-16"
         {...containerProps}
       >
-        <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_420px] lg:items-center">
+        <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_460px] lg:items-center">
           <div>
-            <motion.p
-              className="mb-4 font-mono text-xs uppercase tracking-[0.4em] text-accent"
+            <motion.div
+              className="mb-8 flex flex-wrap items-center gap-x-4 gap-y-2 font-mono text-[10px] uppercase tracking-[0.32em] text-accent"
               {...itemProps}
             >
-              LHN Sovereign V90 · trading & back-end
-            </motion.p>
+              <span>MRS dossier</span>
+              <span className="h-px w-10 bg-accent/40" />
+              <span>HFT / IA local / Web3</span>
+            </motion.div>
 
             <motion.h1
-              className="font-display text-4xl font-bold leading-[1.05] text-white sm:text-6xl lg:text-7xl xl:text-8xl text-shadow-cinema"
+              className="font-display text-5xl font-bold leading-[0.95] text-white sm:text-7xl lg:text-8xl text-shadow-cinema"
               {...itemProps}
             >
               {profile.name.split(" ").slice(0, 2).join(" ")}
               <br />
-              <span className="text-gradient cinematic-glow">
+              <span className="text-gradient">
                 {profile.name.split(" ").slice(2).join(" ")}
               </span>
             </motion.h1>
 
             <motion.p
-              className="mt-6 max-w-2xl text-lg text-slate-100 sm:text-xl text-shadow-cinema"
+              className="mt-7 max-w-2xl text-lg leading-relaxed text-slate-100 sm:text-xl text-shadow-cinema"
               {...itemProps}
             >
-              <span className="font-medium text-white">{profile.role}</span>
-              <span className="text-slate-300"> — </span>
-              {profile.headline}
-            </motion.p>
-
-            <motion.p
-              className="mt-4 max-w-xl text-base leading-relaxed text-slate-200 text-shadow-cinema"
-              {...itemProps}
-            >
-              {profile.bio}
+              Desenvolvedor back-end construindo infraestrutura quantitativa,
+              IA local e ferramentas abertas com uma regra simples: se o dado
+              não precisa sair da máquina, o sistema nasce perto dele.
             </motion.p>
 
             <motion.div className="mt-10 flex flex-wrap gap-4" {...itemProps}>
@@ -107,45 +94,38 @@ export function Hero() {
                 href="#lhn-v90"
                 className="glow-ring rounded-full bg-accent px-7 py-3.5 font-display text-sm font-semibold text-ink"
               >
-                LHN Sovereign V90
+                Ler o dossiê LHN
               </MagneticLink>
               <MagneticLink
-                href="#showreel"
-                className="rounded-full border border-white/30 bg-ink/60 px-7 py-3.5 text-sm text-white backdrop-blur-md"
+                href="#capitulos"
+                className="rounded-full border border-white/25 bg-ink/60 px-7 py-3.5 text-sm text-white backdrop-blur-md"
               >
-                Ver showreel
+                Ver capítulos
               </MagneticLink>
               <MagneticLink
                 href="#projetos"
-                className="rounded-full border border-white/25 bg-ink/50 px-7 py-3.5 text-sm text-slate-100 backdrop-blur-md"
+                className="rounded-full border border-white/20 bg-ink/45 px-7 py-3.5 text-sm text-slate-100 backdrop-blur-md"
               >
-                +{projects.length} projetos
-              </MagneticLink>
-              <MagneticLink
-                href={profile.linkedin}
-                external
-                className="rounded-full border border-white/25 bg-ink/50 px-7 py-3.5 text-sm text-slate-100 backdrop-blur-md"
-              >
-                LinkedIn
+                +{projects.length} repositórios
               </MagneticLink>
             </motion.div>
 
             <motion.dl
-              className="mt-12 grid grid-cols-2 gap-6 border-t border-white/15 pt-8 sm:grid-cols-4"
+              className="mt-12 grid grid-cols-2 gap-5 border-t border-white/15 pt-8 sm:grid-cols-4"
               {...itemProps}
             >
               {[
-                { label: "Sistema HFT", value: "V90" },
-                { label: "Repos OSS", value: "30" },
-                { label: "Docs", value: "pt-BR" },
-                { label: "Exchange", value: "Bybit" },
-              ].map((s) => (
-                <div key={s.label}>
-                  <dt className="font-mono text-[10px] uppercase tracking-[0.2em] text-slate-300">
-                    {s.label}
+                { label: "sistema", value: "V90" },
+                { label: "repos", value: "30" },
+                { label: "idioma", value: "pt-BR" },
+                { label: "modo", value: "local" },
+              ].map((stat) => (
+                <div key={stat.label}>
+                  <dt className="font-mono text-[10px] uppercase tracking-[0.24em] text-slate-400">
+                    {stat.label}
                   </dt>
-                  <dd className="font-display mt-2 text-4xl font-bold text-white tabular-nums text-shadow-cinema">
-                    {s.value}
+                  <dd className="mt-2 font-display text-4xl font-bold tabular-nums text-white">
+                    {stat.value}
                   </dd>
                 </div>
               ))}
@@ -153,32 +133,27 @@ export function Hero() {
           </div>
 
           <motion.aside
-            className="card-glass hidden overflow-hidden border-accent/20 bg-ink/65 backdrop-blur-2xl lg:block"
+            className="dossier-panel hidden overflow-hidden rounded-lg lg:block"
             {...itemProps}
           >
             <div className="flex items-center justify-between border-b border-white/10 px-5 py-4">
               <div>
                 <p className="font-mono text-[10px] uppercase tracking-[0.32em] text-accent">
-                  Operator console
+                  Field console
                 </p>
                 <p className="mt-1 text-sm text-slate-400">
-                  leitura rápida do ecossistema
+                  sinais curtos do ecossistema
                 </p>
               </div>
-              <div className="flex gap-1.5" aria-hidden>
-                <span className="h-2.5 w-2.5 rounded-full bg-cinema-red" />
-                <span className="h-2.5 w-2.5 rounded-full bg-cinema-gold" />
-                <span className="h-2.5 w-2.5 rounded-full bg-mint" />
-              </div>
+              <span className="rounded-full border border-mint/25 bg-mint/10 px-3 py-1 font-mono text-[10px] text-mint">
+                online
+              </span>
             </div>
 
-            <div className="p-4">
+            <div className="p-5">
               <div className="grid grid-cols-2 gap-3">
-                {consoleRows.map((row) => (
-                  <div
-                    key={row.label}
-                    className="rounded-xl border border-white/10 bg-white/[0.03] p-3"
-                  >
+                {readouts.map((row) => (
+                  <div key={row.label} className="rounded-lg border border-white/10 bg-white/[0.03] p-3">
                     <p className="font-mono text-[10px] uppercase tracking-widest text-slate-500">
                       {row.label}
                     </p>
@@ -189,49 +164,23 @@ export function Hero() {
                 ))}
               </div>
 
-              <div className="mt-4 rounded-xl border border-accent/15 bg-ink/75 p-4">
-                <div className="flex items-center justify-between gap-3">
-                  <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-slate-500">
-                    build queue
-                  </p>
-                  <span className="rounded-full bg-mint/10 px-2 py-1 font-mono text-[10px] text-mint">
-                    Tier 1
-                  </span>
-                </div>
-                <ol className="mt-3 space-y-2">
-                  {executionQueue.map((entry, index) => (
-                    <li key={entry} className="flex gap-3 text-sm text-slate-300">
-                      <span className="font-mono text-[11px] text-accent">
-                        {String(index + 1).padStart(2, "0")}
-                      </span>
-                      <span>{entry}</span>
-                    </li>
-                  ))}
-                </ol>
-              </div>
+              <ol className="mt-5 space-y-3 rounded-lg border border-accent/15 bg-ink/70 p-4">
+                {dossier.map((entry, index) => (
+                  <li key={entry} className="grid grid-cols-[28px_1fr] gap-3 text-sm leading-relaxed text-slate-300">
+                    <span className="font-mono text-[11px] text-accent">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <span>{entry}</span>
+                  </li>
+                ))}
+              </ol>
 
-              <div className="mt-4 flex items-center justify-between border-t border-white/10 pt-4 font-mono text-[10px] uppercase tracking-[0.22em] text-slate-500">
-                <span>mode: sovereign</span>
-                <span className="text-accent">online</span>
+              <div className="mt-5 border-t border-white/10 pt-4 font-mono text-[10px] uppercase tracking-[0.24em] text-slate-500">
+                Latência, soberania e legibilidade acima de efeito visual.
               </div>
             </div>
           </motion.aside>
         </div>
-
-        <motion.div className="mt-10 flex justify-center" {...itemProps}>
-          <a
-            href="#showreel"
-            className="flex flex-col items-center gap-2 text-slate-300 transition hover:text-accent"
-            aria-label="Rolar para o showreel"
-          >
-            <span className="font-mono text-[10px] uppercase tracking-[0.3em]">
-              Scroll
-            </span>
-            <span className="scroll-cue flex h-10 w-6 items-start justify-center rounded-full border border-white/30 p-1">
-              <span className="block h-2 w-1 rounded-full bg-accent animate-scroll-cue" />
-            </span>
-          </a>
-        </motion.div>
       </Container>
     </section>
   );

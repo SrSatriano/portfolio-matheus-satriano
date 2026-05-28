@@ -5,7 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
 const links = [
-  { href: "#showreel", label: "Showreel" },
+  { href: "#capitulos", label: "Capítulos" },
   { href: "#lhn-v90", label: "LHN V90" },
   { href: "#github", label: "GitHub" },
   { href: "#projetos", label: "Projetos" },

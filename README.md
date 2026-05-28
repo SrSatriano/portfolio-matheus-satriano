@@ -1,8 +1,14 @@
-# Meu portfólio — Matheus Rodrigues Satriano
+# Portfólio Cinemático — Matheus Rodrigues Satriano
 
 Site que eu fiz em **Next.js** para reunir o [LHN Sovereign V90](https://github.com/SrSatriano/LHN-V90-IA) e os [trinta repos](https://github.com/SrSatriano) que publico no GitHub.
 
 **No ar:** [srsatriano.github.io/portfolio-matheus-satriano](https://srsatriano.github.io/portfolio-matheus-satriano/)
+
+## Direção visual
+
+O site usa uma estética de dossiê técnico: campos visuais gerados em código,
+painéis de arquitetura, capítulos interativos e copy mais direta sobre
+latência, IA local, risco e infraestrutura. Não depende de vídeos de fundo.
 
 ## Rodar na minha máquina
 
@@ -27,7 +33,7 @@ Saída em `out/`.
 | Arquivo | O quê |
 |---------|--------|
 | `data/projects.ts` | Projetos, LHN, meus links |
-| `data/media.ts` | Vídeos e imagens de fundo |
+| `components/cinematic/CinematicField.tsx` | Atmosfera visual, grid, traços e composição cinematográfica |
 | `components/` | Páginas e blocos do site |
 
 ## Deploy
