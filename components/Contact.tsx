@@ -25,7 +25,11 @@ export function Contact() {
       id="contato"
       className="relative scroll-mt-24 overflow-hidden py-28"
     >
-      <VideoLayer src={cinematicVideos.contact.src} overlay="section" />
+      <VideoLayer
+        src={cinematicVideos.contact.src}
+        poster={cinematicVideos.contact.poster}
+        overlay="section"
+      />
 
       <div className="relative z-10 mx-auto max-w-6xl px-6">
         <Reveal>

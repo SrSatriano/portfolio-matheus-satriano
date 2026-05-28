@@ -108,10 +108,17 @@ export function FlagshipLHN() {
                   <video
                     className="h-full w-full object-cover opacity-80"
                     src={cinematicVideos.lhn.src}
+                    poster={cinematicVideos.lhn.poster}
                     muted
                     loop
                     playsInline
-                    autoPlay
+                    preload="metadata"
+                    onMouseEnter={(event) => {
+                      event.currentTarget.play().catch(() => undefined);
+                    }}
+                    onMouseLeave={(event) => {
+                      event.currentTarget.pause();
+                    }}
                   />
                   <div className="absolute inset-0 flex items-center justify-center bg-ink/30 opacity-0 transition hover:opacity-100">
                     <span className="font-mono text-xs uppercase tracking-widest text-white">

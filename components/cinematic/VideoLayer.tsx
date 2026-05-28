@@ -27,19 +27,44 @@ export function VideoLayer({
   paused = false,
 }: VideoLayerProps) {
   const reduced = usePrefersReducedMotion();
-  const ref = useRef<HTMLVideoElement>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const [ready, setReady] = useState(false);
   const [failed, setFailed] = useState(false);
+  const [nearViewport, setNearViewport] = useState(priority);
+  const [shouldLoad, setShouldLoad] = useState(priority);
 
   useEffect(() => {
-    const el = ref.current;
+    if (priority) return;
+
+    const node = wrapperRef.current;
+    if (!node) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        const visible = entry.isIntersecting || entry.intersectionRatio > 0;
+        setNearViewport(visible);
+        if (visible) setShouldLoad(true);
+      },
+      { rootMargin: "600px 0px", threshold: 0.01 },
+    );
+
+    observer.observe(node);
+
+    return () => observer.disconnect();
+  }, [priority]);
+
+  useEffect(() => {
+    const el = videoRef.current;
     if (!el || reduced || failed) return;
-    if (paused) {
+
+    if (paused || !nearViewport) {
       el.pause();
       return;
     }
+
     el.play().catch(() => undefined);
-  }, [paused, reduced, src, failed]);
+  }, [paused, nearViewport, reduced, src, failed]);
 
   const posterStyle = poster
     ? {
@@ -52,6 +77,7 @@ export function VideoLayer({
   if (reduced) {
     return (
       <div
+        ref={wrapperRef}
         className={`absolute inset-0 ${className}`}
         style={posterStyle}
         aria-hidden
@@ -62,19 +88,22 @@ export function VideoLayer({
   }
 
   return (
-    <div className={`absolute inset-0 overflow-hidden ${className}`} aria-hidden>
-      {/* Poster sempre visível (fallback se o vídeo falhar) */}
+    <div
+      ref={wrapperRef}
+      className={`absolute inset-0 overflow-hidden ${className}`}
+      aria-hidden
+    >
       <div className="absolute inset-0 scale-105" style={posterStyle} />
 
-      {!failed && (
+      {!failed && shouldLoad && (
         <video
-          ref={ref}
+          ref={videoRef}
           className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${
             ready ? "opacity-50" : "opacity-0"
           } scale-105 animate-ken-burns`}
           src={src}
           poster={poster}
-          autoPlay
+          autoPlay={priority}
           muted
           loop
           playsInline
@@ -84,7 +113,6 @@ export function VideoLayer({
         />
       )}
 
-      {/* Hero: vinheta forte à esquerda para o texto */}
       {overlay === "hero" && (
         <div
           className="absolute inset-0 bg-gradient-to-r from-ink via-ink/85 to-ink/20"

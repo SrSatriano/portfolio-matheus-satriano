@@ -52,6 +52,7 @@ export function About() {
     <section id="sobre" className="relative scroll-mt-24 overflow-hidden py-28">
       <VideoLayer
         src={cinematicVideos.about.src}
+        poster={cinematicVideos.about.poster}
         overlay="section"
         className="opacity-40"
       />
