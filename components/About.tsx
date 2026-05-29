@@ -2,6 +2,7 @@
 
 import { CinematicField } from "@/components/cinematic/CinematicField";
 import { Reveal } from "@/components/cinematic/Reveal";
+import { engineeringLayers, focusDirections } from "@/data/readme-dossier";
 import { motion } from "framer-motion";
 
 const pillars = [
@@ -113,6 +114,52 @@ export function About() {
                   </p>
                 </div>
               ))}
+            </div>
+          </div>
+        </Reveal>
+
+        <Reveal delay={0.3}>
+          <div className="mt-14 grid gap-8 lg:grid-cols-[0.8fr_1fr]">
+            <div>
+              <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-accent">
+                do README para a prática
+              </p>
+              <h3 className="mt-3 font-display text-3xl font-semibold text-white">
+                O que aparece com frequência nos projetos.
+              </h3>
+              <div className="mt-6 overflow-hidden rounded-lg border border-white/10 bg-ink-50/50">
+                {focusDirections.map((item) => (
+                  <div key={item.direction} className="border-b border-white/10 p-4 last:border-b-0">
+                    <p className="font-display text-base font-semibold text-white">
+                      {item.direction}
+                    </p>
+                    <p className="mt-2 text-sm leading-relaxed text-slate-400">
+                      {item.code}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-accent">
+                tese de engenharia
+              </p>
+              <h3 className="mt-3 font-display text-3xl font-semibold text-white">
+                Como eu monto sistemas que depois dão para operar.
+              </h3>
+              <div className="mt-6 grid gap-3 sm:grid-cols-2">
+                {engineeringLayers.map((layer) => (
+                  <div key={layer.layer} className="rounded-lg border border-white/10 bg-white/[0.025] p-4">
+                    <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-accent">
+                      {layer.layer}
+                    </p>
+                    <p className="mt-2 text-sm leading-relaxed text-slate-400">
+                      {layer.preference}
+                    </p>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </Reveal>

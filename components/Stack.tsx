@@ -1,34 +1,8 @@
 "use client";
 
 import { Reveal } from "@/components/cinematic/Reveal";
+import { stackDossierGroups } from "@/data/readme-dossier";
 import { motion } from "framer-motion";
-
-const groups = [
-  {
-    label: "Linguagens",
-    items: ["Python", "Rust", "C++", "TypeScript", "Go", "Solidity", "R"],
-  },
-  {
-    label: "Back-end & APIs",
-    items: ["FastAPI", "Node.js", "Express", "gRPC", "ZeroMQ"],
-  },
-  {
-    label: "Front-end",
-    items: ["Next.js", "React", "Tailwind CSS", "Recharts"],
-  },
-  {
-    label: "Dados & ML",
-    items: ["PostgreSQL", "Redis", "PyTorch", "ONNX", "Ollama"],
-  },
-  {
-    label: "Infra & Ops",
-    items: ["Docker", "Kubernetes", "Ansible", "Prometheus", "Grafana"],
-  },
-  {
-    label: "Web3",
-    items: ["Hardhat", "OpenZeppelin", "Circom", "libp2p", "Fabric"],
-  },
-];
 
 const modes = [
   {
@@ -96,8 +70,8 @@ export function Stack() {
           ))}
         </div>
 
-        <div className="mt-16 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
-          {groups.map((g, i) => (
+        <div className="mt-16 grid gap-10 sm:grid-cols-2">
+          {stackDossierGroups.map((g, i) => (
             <Reveal key={g.label} delay={i * 0.06}>
               <div>
                 <h3 className="font-mono text-sm text-accent">{g.label}</h3>

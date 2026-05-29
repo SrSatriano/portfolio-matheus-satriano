@@ -3,6 +3,7 @@
 import { CinematicField } from "@/components/cinematic/CinematicField";
 import { MagneticLink } from "@/components/cinematic/MagneticLink";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
+import { githubStats } from "@/data/github-inventory";
 import { profile, projects } from "@/data/projects";
 import { motion } from "framer-motion";
 
@@ -116,9 +117,9 @@ export function Hero() {
             >
               {[
                 { label: "sistema", value: "V90" },
-                { label: "repos", value: "30" },
-                { label: "idioma", value: "pt-BR" },
-                { label: "modo", value: "local" },
+                { label: "públicos", value: String(githubStats.totalPublic) },
+                { label: "módulos", value: String(projects.length) },
+                { label: "docs", value: "pt-BR" },
               ].map((stat) => (
                 <div key={stat.label}>
                   <dt className="font-mono text-[10px] uppercase tracking-[0.24em] text-slate-400">

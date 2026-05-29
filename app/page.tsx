@@ -7,6 +7,7 @@ import { GitHubDashboard } from "@/components/GitHubDashboard";
 import { Hero } from "@/components/Hero";
 import { Nav } from "@/components/Nav";
 import { ProjectGrid } from "@/components/ProjectGrid";
+import { ReadmeDossier } from "@/components/ReadmeDossier";
 import { Stack } from "@/components/Stack";
 
 export default function Home() {
@@ -17,8 +18,9 @@ export default function Home() {
         <Hero />
         <Chapters />
         <FlagshipLHN />
-        <GitHubDashboard />
         <About />
+        <ReadmeDossier />
+        <GitHubDashboard />
         <ProjectGrid />
         <Stack />
         <Contact />

@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 const links = [
   { href: "#capitulos", label: "Capítulos" },
   { href: "#lhn-v90", label: "LHN V90" },
+  { href: "#readme-dossier", label: "README" },
   { href: "#github", label: "GitHub" },
   { href: "#projetos", label: "Projetos" },
   { href: "#contato", label: "Contato" },
@@ -46,7 +47,7 @@ export function Nav() {
           MRS<span className="text-accent">.</span>
         </a>
 
-        <ul className="hidden items-center gap-8 md:flex">
+        <ul className="hidden items-center gap-6 md:flex">
           {links.map((l) => (
             <li key={l.href}>
               <a

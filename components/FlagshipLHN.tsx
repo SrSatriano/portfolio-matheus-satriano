@@ -4,6 +4,7 @@ import { CinematicField } from "@/components/cinematic/CinematicField";
 import { MagneticLink } from "@/components/cinematic/MagneticLink";
 import { Reveal } from "@/components/cinematic/Reveal";
 import { flagshipLHN, githubUrl } from "@/data/projects";
+import { lhnReadmeLayers } from "@/data/readme-dossier";
 import { motion } from "framer-motion";
 
 const architecture = [
@@ -203,6 +204,19 @@ export function FlagshipLHN() {
                 <div className="grid gap-0 xl:grid-cols-[minmax(0,1fr)_0.8fr]">
                   <div className="p-5">
                     <ArchitectureGraph />
+
+                    <div className="mt-6 grid gap-3 sm:grid-cols-2">
+                      {lhnReadmeLayers.map((layer) => (
+                        <div key={layer.label} className="rounded-lg border border-white/10 bg-white/[0.025] p-3">
+                          <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-accent">
+                            {layer.label}
+                          </p>
+                          <p className="mt-2 text-xs leading-relaxed text-slate-400">
+                            {layer.text}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
 
                     <ul className="mt-6 space-y-3 text-sm text-slate-400">
                       {flagshipLHN.features.slice(0, 5).map((feature) => (
