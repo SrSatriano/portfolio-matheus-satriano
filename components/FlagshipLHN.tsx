@@ -273,7 +273,7 @@ export function FlagshipLHN() {
               <a href={githubUrl(flagshipLHN.slug)} className="text-accent hover:underline">
                 github.com/SrSatriano/{flagshipLHN.slug}
               </a>
-              {" · "}PolyForm Noncommercial, com módulos 01-30 em MIT quando aplicável.
+              {" · "}PolyForm Noncommercial; os módulos abertos em volta dele são, na maioria, MIT.
             </p>
           </Reveal>
         </div>

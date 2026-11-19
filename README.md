@@ -1,14 +1,32 @@
-# Portfólio Cinemático — Matheus Rodrigues Satriano
+# Portfólio — Matheus Rodrigues Satriano
 
-Site que eu fiz em **Next.js** para reunir o [LHN Sovereign V90](https://github.com/SrSatriano/LHN-V90-IA) e os [trinta repos](https://github.com/SrSatriano) que publico no GitHub.
+Site em **Next.js** que reúne o [LHN Sovereign V90](https://github.com/SrSatriano/LHN-V90-IA), o [CortaLive](https://github.com/SrSatriano/CortaLive-Basico) e todos os repositórios públicos que mantenho no GitHub.
 
 **No ar:** [srsatriano.github.io/portfolio-matheus-satriano](https://srsatriano.github.io/portfolio-matheus-satriano/)
 
-## Direção visual
+## O que tem na página
 
-O site usa uma estética de dossiê técnico: campos visuais gerados em código,
-painéis de arquitetura, capítulos interativos e copy mais direta sobre
-latência, IA local, risco e infraestrutura. Não depende de vídeos de fundo.
+| Seção | O que mostra |
+|---|---|
+| Abertura | quem sou, números atualizados e atalho para o lançamento mais recente |
+| CortaLive | fluxo de corte, celular com o corte animado, Básico × Pro e downloads |
+| LHN V90 | arquitetura e camadas do terminal quant |
+| Projetos | todos os repositórios públicos, com busca, filtro por frente e atalhos (novos, destaques, CI, site/download) |
+| Em números | projetos por frente, linguagens e linha do tempo |
+| Sobre, Stack, Contato | como eu construo, ferramentas e canais |
+
+## De onde vêm os dados
+
+`data/catalog.json` é a mesma base que gera o README do meu perfil
+([SrSatriano/SrSatriano](https://github.com/SrSatriano/SrSatriano) → `data/projects.json`).
+Para incluir ou mudar um projeto, edite lá, copie o arquivo para cá e faça push:
+cards, filtros, contagens, gráficos e linha do tempo são derivados dele (`data/catalog.ts`).
+
+| Arquivo | O quê |
+|---|---|
+| `data/catalog.json` | projetos públicos, frentes, cores e textos |
+| `data/projects.ts` | dados do LHN e meus links |
+| `components/` | seções da página |
 
 ## Rodar na minha máquina
 
@@ -27,14 +45,6 @@ npm run build
 ```
 
 Saída em `out/`.
-
-## Onde edito
-
-| Arquivo | O quê |
-|---------|--------|
-| `data/projects.ts` | Projetos, LHN, meus links |
-| `components/cinematic/CinematicField.tsx` | Atmosfera visual, grid, traços e composição cinematográfica |
-| `components/` | Páginas e blocos do site |
 
 ## Deploy
 

@@ -1,92 +1,128 @@
 "use client";
 
-import type { Project } from "@/data/projects";
-import { CATEGORY_LABELS, TIER_LABELS, githubUrl } from "@/data/projects";
+import { Icon } from "@/components/Icon";
+import {
+  LANG_COLORS,
+  categoryById,
+  ciUrl,
+  repoUrl,
+  type Project,
+} from "@/data/catalog";
 import { motion } from "framer-motion";
+import type { CSSProperties, ReactNode } from "react";
 
-const TIER_TONE: Record<Project["tier"], string> = {
-  1: "border-mint/30 bg-mint/10 text-mint",
-  2: "border-accent/30 bg-accent/10 text-accent",
-  3: "border-cinema-gold/30 bg-cinema-gold/10 text-cinema-gold",
-  4: "border-cinema-red/30 bg-cinema-red/10 text-cinema-red",
-};
+function Badge({ children, tone }: { children: ReactNode; tone: string }) {
+  return (
+    <span className={`rounded-full border px-2 py-0.5 font-mono text-[9.5px] font-semibold uppercase tracking-wider ${tone}`}>
+      {children}
+    </span>
+  );
+}
 
-export function ProjectCard({ project }: { project: Project }) {
-  const extraStackCount = Math.max(project.stack.length - 3, 0);
+export function ProjectCard({ project: p }: { project: Project }) {
+  const cat = categoryById[p.cat];
+  const style = { "--c": cat.color } as CSSProperties;
+  const url = repoUrl(p.name);
+  const ci = ciUrl(p);
+  const links = [
+    { href: url, label: "Código", icon: "github" },
+    { href: `${url}#readme`, label: "README", icon: "book" },
+    ...(p.download ? [{ href: p.download, label: "Baixar", icon: "download" }] : []),
+    ...(p.demo ? [{ href: p.demo, label: "Site", icon: "globe" }] : []),
+  ];
 
   return (
     <motion.article
-      className="card-glass group relative flex min-h-[300px] flex-col overflow-hidden p-6 backdrop-blur-md"
-      whileHover={{
-        y: -6,
-        boxShadow:
-          "0 0 0 1px rgba(34, 211, 238, 0.25), 0 0 48px -12px rgba(34, 211, 238, 0.35)",
-      }}
-      transition={{ type: "spring", stiffness: 300, damping: 22 }}
+      layout
+      initial={{ opacity: 0, y: 16 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, scale: 0.97 }}
+      transition={{ duration: 0.3 }}
+      style={style}
+      className="project-card card-glass group relative flex h-full flex-col overflow-hidden p-5"
     >
-      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/50 to-transparent opacity-0 transition group-hover:opacity-100" />
+      <div className="absolute inset-x-0 top-0 h-[3px] bg-[var(--c)] opacity-70" />
+      <div className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full bg-[var(--c)] opacity-[0.07] blur-2xl transition group-hover:opacity-[0.16]" />
 
-      <div className="flex flex-wrap items-start justify-between gap-2">
-        <span className="font-mono text-xs text-slate-500">#{project.id}</span>
-        <div className="flex flex-wrap gap-1.5">
-          <span
-            className={`rounded-full border px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider ${TIER_TONE[project.tier]}`}
-            title={TIER_LABELS[project.tier]}
-          >
-            T{project.tier}
+      <div className="flex items-start justify-between gap-3">
+        <div className="flex items-center gap-2.5">
+          <span className="cat-chip flex h-8 w-8 items-center justify-center rounded-lg text-[var(--c)]">
+            <Icon name={cat.icon} className="h-4 w-4" />
           </span>
-          {project.demoReady && (
-            <span className="rounded-full bg-emerald-500/10 px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider text-emerald-400">
-              Demo
-            </span>
+          <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-[var(--c)]">
+            {cat.short}
+          </span>
+        </div>
+        <div className="flex flex-wrap justify-end gap-1.5">
+          {p.new && <Badge tone="border-red-400/50 bg-red-500/10 text-red-300">Novo</Badge>}
+          {p.featured && !p.new && <Badge tone="border-amber-400/40 bg-amber-400/10 text-amber-300">★ Destaque</Badge>}
+          {p.ci && <Badge tone="border-emerald-400/40 bg-emerald-400/10 text-emerald-300">CI</Badge>}
+        </div>
+      </div>
+
+      <h3 className="mt-4 font-display text-xl font-semibold leading-tight text-white">
+        <a
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="after:absolute after:inset-0 after:content-[''] focus-visible:outline-none"
+        >
+          {p.title}
+        </a>
+      </h3>
+      <p className="mt-1 truncate font-mono text-[11px] text-slate-500">SrSatriano/{p.name}</p>
+
+      <p className="mt-3 text-sm leading-relaxed text-slate-300">{p.summary}</p>
+
+      <ul className="mt-4 space-y-1.5">
+        {p.highlights.map((h) => (
+          <li key={h} className="flex gap-2 text-[13px] leading-snug text-slate-400">
+            <Icon name="check" className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[var(--c)]" strokeWidth={2.4} />
+            <span>{h}</span>
+          </li>
+        ))}
+      </ul>
+
+      <div className="mt-auto pt-5">
+        <div className="flex flex-wrap items-center gap-1.5">
+          <span className="mr-1 inline-flex items-center gap-1.5 text-xs font-semibold text-slate-200">
+            <span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: LANG_COLORS[p.lang] ?? "#64748b" }} />
+            {p.lang}
+          </span>
+          {p.stack
+            .filter((s) => s !== p.lang)
+            .slice(0, 4)
+            .map((s) => (
+              <span key={s} className="rounded-md border border-white/10 bg-white/[0.03] px-1.5 py-0.5 font-mono text-[10px] text-slate-400">
+                {s}
+              </span>
+            ))}
+        </div>
+
+        <div className="relative z-10 mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-white/10 pt-3">
+          {links.map((l) => (
+            <a
+              key={l.label}
+              href={l.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 font-mono text-[11px] text-slate-400 transition hover:text-[var(--c)]"
+            >
+              <Icon name={l.icon} className="h-3.5 w-3.5" />
+              {l.label}
+            </a>
+          ))}
+          {ci && (
+            <a href={ci} target="_blank" rel="noopener noreferrer" className="ml-auto" aria-label={`Status do CI de ${p.title}`}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={`${ci}/badge.svg`} alt="CI" className="h-4" loading="lazy" />
+            </a>
           )}
-          {project.featured && (
-            <span className="rounded-full bg-mint/10 px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider text-mint">
-              Destaque
-            </span>
+          {!ci && p.license && (
+            <span className="ml-auto font-mono text-[10px] uppercase tracking-wider text-slate-600">{p.license}</span>
           )}
         </div>
       </div>
-      <h3 className="mt-3 font-display text-lg font-semibold text-white transition group-hover:text-accent">
-        {project.title}
-      </h3>
-      <p className="mt-2 flex-1 text-sm leading-relaxed text-slate-400">
-        {project.tagline}
-      </p>
-      <div className="mt-5 h-px bg-gradient-to-r from-white/10 via-white/5 to-transparent" />
-      <div className="mt-4 flex flex-wrap gap-2">
-        <span className="rounded-md bg-white/5 px-2 py-1 font-mono text-[10px] text-accent">
-          {CATEGORY_LABELS[project.category]}
-        </span>
-        {project.stack.slice(0, 3).map((t) => (
-          <span
-            key={t}
-            className="rounded-md bg-white/5 px-2 py-1 font-mono text-[10px] text-slate-400"
-          >
-            {t}
-          </span>
-        ))}
-        {extraStackCount > 0 && (
-          <span className="rounded-md bg-white/5 px-2 py-1 font-mono text-[10px] text-slate-500">
-            +{extraStackCount}
-          </span>
-        )}
-      </div>
-      <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.18em] text-slate-600">
-        {TIER_LABELS[project.tier]}
-      </p>
-      <a
-        href={githubUrl(project.slug)}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="mt-6 inline-flex items-center justify-between gap-2 rounded-lg border border-white/10 bg-white/[0.03] px-4 py-3 font-mono text-xs text-accent transition hover:border-accent/40 hover:bg-accent/10 hover:text-accent-glow"
-        aria-label={`Abrir ${project.title} no GitHub`}
-      >
-        <span>Ver no GitHub</span>
-        <span aria-hidden className="transition group-hover:translate-x-1">
-          ↗
-        </span>
-      </a>
     </motion.article>
   );
 }

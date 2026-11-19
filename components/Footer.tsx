@@ -1,3 +1,4 @@
+import { formatDate, updated } from "@/data/catalog";
 import { profile } from "@/data/projects";
 
 export function Footer() {
@@ -8,8 +9,16 @@ export function Footer() {
           © {new Date().getFullYear()} {profile.name}
         </p>
         <p className="text-center text-xs text-slate-600 sm:text-right">
-          Feito por mim com Next.js · Docs em{" "}
-          <span className="text-accent">pt-BR</span>
+          Atualizado em {formatDate(updated)} · Next.js · docs em{" "}
+          <span className="text-accent">pt-BR</span> ·{" "}
+          <a
+            href="https://github.com/SrSatriano/portfolio-matheus-satriano"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-slate-400 underline-offset-4 hover:text-accent hover:underline"
+          >
+            código deste site
+          </a>
         </p>
       </div>
     </footer>

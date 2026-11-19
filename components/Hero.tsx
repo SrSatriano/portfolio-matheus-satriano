@@ -3,8 +3,9 @@
 import { CinematicField } from "@/components/cinematic/CinematicField";
 import { MagneticLink } from "@/components/cinematic/MagneticLink";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
-import { githubStats } from "@/data/github-inventory";
-import { profile, projects } from "@/data/projects";
+import { Icon } from "@/components/Icon";
+import { stats } from "@/data/catalog";
+import { profile } from "@/data/projects";
 import { motion } from "framer-motion";
 
 const stagger = {
@@ -26,13 +27,13 @@ const readouts = [
   { label: "foco", value: "low latency" },
   { label: "modelo", value: "local-first" },
   { label: "surface", value: "back-end + produto" },
-  { label: "arquivo", value: "30 módulos OSS" },
+  { label: "arquivo", value: `${stats.total} repos públicos` },
 ];
 
 const dossier = [
   "Engenharia de sistemas para mercado, risco e inferência local.",
   "Arquiteturas que cabem em workstation antes de depender de nuvem.",
-  "READMEs em português, demos rastreáveis e código organizado por tier.",
+  "READMEs em português, CI no GitHub Actions e instaladores quando faz sentido.",
 ];
 
 export function Hero() {
@@ -61,13 +62,27 @@ export function Hero() {
       >
         <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_460px] lg:items-center">
           <div>
+            <motion.a
+              href="#cortalive"
+              className="group mb-7 inline-flex items-center gap-3 rounded-full border border-pink-400/40 bg-pink-500/10 py-1.5 pl-1.5 pr-4 text-sm text-pink-100 backdrop-blur-md transition hover:border-pink-300/70 hover:bg-pink-500/20"
+              {...itemProps}
+            >
+              <span className="rounded-full bg-gradient-to-r from-pink-500 to-amber-400 px-2.5 py-0.5 font-mono text-[10px] font-bold uppercase tracking-wider text-white">
+                Novo
+              </span>
+              <span>
+                <strong className="font-semibold text-white">CortaLive</strong>: lives viram cortes verticais com IA
+              </span>
+              <Icon name="arrow" className="h-4 w-4 transition group-hover:translate-x-1" />
+            </motion.a>
+
             <motion.div
               className="mb-8 flex flex-wrap items-center gap-x-4 gap-y-2 font-mono text-[10px] uppercase tracking-[0.32em] text-accent"
               {...itemProps}
             >
               <span>MRS dossier</span>
               <span className="h-px w-10 bg-accent/40" />
-              <span>HFT / IA local / Web3</span>
+              <span>Quant / IA local / Criadores</span>
             </motion.div>
 
             <motion.h1
@@ -76,7 +91,7 @@ export function Hero() {
             >
               {profile.name.split(" ").slice(0, 2).join(" ")}
               <br />
-              <span className="text-gradient">
+              <span className="hero-surname">
                 {profile.name.split(" ").slice(2).join(" ")}
               </span>
             </motion.h1>
@@ -92,22 +107,22 @@ export function Hero() {
 
             <motion.div className="mt-10 flex flex-wrap gap-4" {...itemProps}>
               <MagneticLink
-                href="#lhn-v90"
+                href="#projetos"
                 className="glow-ring rounded-full bg-accent px-7 py-3.5 font-display text-sm font-semibold text-ink"
+              >
+                Explorar {stats.total} projetos
+              </MagneticLink>
+              <MagneticLink
+                href="#lhn-v90"
+                className="rounded-full border border-white/25 bg-ink/60 px-7 py-3.5 text-sm text-white backdrop-blur-md"
               >
                 Ler o dossiê LHN
               </MagneticLink>
               <MagneticLink
-                href="#capitulos"
-                className="rounded-full border border-white/25 bg-ink/60 px-7 py-3.5 text-sm text-white backdrop-blur-md"
-              >
-                Ver capítulos
-              </MagneticLink>
-              <MagneticLink
-                href="#projetos"
+                href="#contato"
                 className="rounded-full border border-white/20 bg-ink/45 px-7 py-3.5 text-sm text-slate-100 backdrop-blur-md"
               >
-                +{projects.length} repositórios
+                Falar comigo
               </MagneticLink>
             </motion.div>
 
@@ -116,9 +131,9 @@ export function Hero() {
               {...itemProps}
             >
               {[
-                { label: "sistema", value: "V90" },
-                { label: "públicos", value: String(githubStats.totalPublic) },
-                { label: "módulos", value: String(projects.length) },
+                { label: "repos públicos", value: String(stats.total) },
+                { label: "frentes", value: String(stats.categories) },
+                { label: "com CI", value: String(stats.withCi) },
                 { label: "docs", value: "pt-BR" },
               ].map((stat) => (
                 <div key={stat.label}>
