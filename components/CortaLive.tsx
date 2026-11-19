@@ -58,21 +58,21 @@ function PhoneMock() {
           {/* webcam */}
           <div className="absolute inset-x-0 top-0 h-[42%] bg-gradient-to-br from-slate-600 to-slate-900">
             <svg viewBox="0 0 200 120" className="absolute inset-0 h-full w-full" aria-hidden>
-              <circle cx="100" cy="58" r="24" fill="#cbd5e1" />
-              <ellipse cx="100" cy="128" rx="48" ry="36" fill="#cbd5e1" />
-              <circle cx="92" cy="54" r="2.8" fill="#0f172a" />
-              <circle cx="108" cy="54" r="2.8" fill="#0f172a" />
-              <ellipse cx="100" cy="68" rx="6" ry="5" fill="#0f172a">
-                {!reduced && <animate attributeName="ry" values="4;8;4" dur="1.2s" repeatCount="indefinite" />}
+              <circle cx="100" cy="72" r="20" fill="#cbd5e1" />
+              <ellipse cx="100" cy="134" rx="44" ry="34" fill="#cbd5e1" />
+              <circle cx="93" cy="69" r="2.5" fill="#0f172a" />
+              <circle cx="107" cy="69" r="2.5" fill="#0f172a" />
+              <ellipse cx="100" cy="81" rx="5" ry="4" fill="#0f172a">
+                {!reduced && <animate attributeName="ry" values="3;6;3" dur="1.2s" repeatCount="indefinite" />}
               </ellipse>
             </svg>
-            <span className="absolute left-3 top-8 rounded bg-red-500 px-1.5 py-0.5 font-mono text-[9px] font-bold text-white">
+            <span className="absolute bottom-2 left-3 rounded bg-red-500 px-1.5 py-0.5 font-mono text-[9px] font-bold text-white">
               ● AO VIVO
             </span>
           </div>
           {/* jogo */}
           <div className="absolute inset-x-0 bottom-0 h-[58%] bg-gradient-to-b from-blue-900 to-violet-700">
-            <svg viewBox="0 0 200 170" preserveAspectRatio="none" className="absolute inset-0 h-full w-full" aria-hidden>
+            <svg viewBox="0 0 200 170" preserveAspectRatio="xMidYMax slice" className="absolute inset-0 h-full w-full" aria-hidden>
               <polygon points="0,120 45,70 85,105 130,55 200,115 200,170 0,170" fill="#312e81" />
               <polygon points="0,150 60,115 120,145 165,122 200,138 200,170 0,170" fill="#1e1b4b" />
               <circle cx="140" cy="88" r="14" fill="#fbbf24" opacity="0.85">
@@ -86,7 +86,7 @@ function PhoneMock() {
             </svg>
           </div>
           {/* título de gancho */}
-          <div className="absolute inset-x-3 top-[11%] z-10 rounded-md bg-black/60 px-2 py-1.5 text-center text-[13px] font-black tracking-wide text-white">
+          <div className="absolute inset-x-3 top-[7%] z-10 rounded-md bg-black/60 px-2 py-1.5 text-center text-[13px] font-black tracking-wide text-white">
             ELE NÃO ACREDITOU
           </div>
           {/* legenda palavra a palavra */}
