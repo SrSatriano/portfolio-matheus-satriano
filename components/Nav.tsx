@@ -5,11 +5,11 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
 const links = [
-  { href: "#capitulos", label: "Capítulos" },
+  { href: "#cortalive", label: "CortaLive", hot: true },
   { href: "#lhn-v90", label: "LHN V90" },
-  { href: "#readme-dossier", label: "README" },
-  { href: "#github", label: "GitHub" },
   { href: "#projetos", label: "Projetos" },
+  { href: "#numeros", label: "Números" },
+  { href: "#sobre", label: "Sobre" },
   { href: "#contato", label: "Contato" },
 ];
 
@@ -39,7 +39,7 @@ export function Nav() {
           : "bg-gradient-to-b from-ink/80 to-transparent"
       }`}
     >
-      <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+      <nav aria-label="Principal" className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         <a
           href="#"
           className="font-display text-lg font-semibold tracking-tight text-white"
@@ -52,9 +52,12 @@ export function Nav() {
             <li key={l.href}>
               <a
                 href={l.href}
-                className="font-mono text-xs uppercase tracking-wider text-slate-400 transition hover:text-accent"
+                className={`font-mono text-xs uppercase tracking-wider transition hover:text-accent ${
+                  l.hot ? "text-pink-300" : "text-slate-400"
+                }`}
               >
                 {l.label}
+                {l.hot && <span className="ml-1.5 inline-block h-1.5 w-1.5 -translate-y-1.5 rounded-full bg-pink-400" />}
               </a>
             </li>
           ))}

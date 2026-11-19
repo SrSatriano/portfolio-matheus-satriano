@@ -1,0 +1,980 @@
+{
+  "owner": "SrSatriano",
+  "updated": "2026-11-19",
+  "categories": [
+    {
+      "id": "quant",
+      "title": "Quant, trading e mercado",
+      "short": "Quant & trading",
+      "color": "#38bdf8",
+      "emoji": "📈",
+      "intro": "Microestrutura, pricing, risco e execução. O núcleo é o LHN Sovereign V90; os outros módulos isolam um problema de cada vez para medir e testar.",
+      "color_light": "#0284c7",
+      "icon": "chart"
+    },
+    {
+      "id": "ai",
+      "title": "IA local, LLMs e avaliação",
+      "short": "IA local",
+      "color": "#a78bfa",
+      "emoji": "🧠",
+      "intro": "Modelos rodando perto dos dados: RAG offline, gateway de inferência, voz, avaliação de alucinação e modelos experimentais com validação honesta.",
+      "color_light": "#7c3aed",
+      "icon": "chip"
+    },
+    {
+      "id": "media",
+      "title": "Vídeo, áudio e criadores",
+      "short": "Vídeo & criadores",
+      "color": "#f472b6",
+      "emoji": "🎬",
+      "intro": "Ferramentas para produzir, editar e medir conteúdo: edição em massa, pipelines de Shorts, trilhas procedurais, analytics de canais e produção editorial.",
+      "color_light": "#db2777",
+      "icon": "play"
+    },
+    {
+      "id": "product",
+      "title": "Produto, finanças BR e carreira",
+      "short": "Produto & Brasil",
+      "color": "#f59e0b",
+      "emoji": "🇧🇷",
+      "intro": "Problemas do dia a dia brasileiro: notas fiscais, imposto na B3, metas financeiras em família, busca de vagas e base SaaS B2B.",
+      "color_light": "#d97706",
+      "icon": "briefcase"
+    },
+    {
+      "id": "web3",
+      "title": "Web3, identidade e segurança on-chain",
+      "short": "Web3",
+      "color": "#22c55e",
+      "emoji": "⛓️",
+      "intro": "Contratos, provas de conhecimento zero, redes P2P e análise de risco on-chain. Tudo em testnet ou ambiente local, com limitações documentadas.",
+      "color_light": "#16a34a",
+      "icon": "cube"
+    },
+    {
+      "id": "infra",
+      "title": "Infraestrutura, sistemas e observabilidade",
+      "short": "Infra",
+      "color": "#2dd4bf",
+      "emoji": "🛠️",
+      "intro": "A base que deixa o resto operável: logs comprimidos, tracing no kernel, GitOps, isolamento por hypervisor e provisionamento reproduzível.",
+      "color_light": "#0d9488",
+      "icon": "server"
+    },
+    {
+      "id": "origins",
+      "title": "Origens, estudos e sites",
+      "short": "Origens",
+      "color": "#94a3b8",
+      "emoji": "🌱",
+      "intro": "De onde eu vim: primeiros experimentos com IA e finanças, exercícios de curso e os sites públicos que apresentam o trabalho.",
+      "color_light": "#64748b",
+      "icon": "sprout"
+    }
+  ],
+  "projects": [
+    {
+      "name": "LHN-V90-IA",
+      "cat": "quant",
+      "lang": "Python",
+      "featured": true,
+      "license": "PolyForm NC",
+      "created": "2026-04-27",
+      "title": "LHN Sovereign V90",
+      "summary": "Meu terminal quantitativo local para cripto: backend FastAPI, painel Next.js, integração Bybit V5 (REST + WebSocket), camadas de risco, telemetria e módulos de IA em Keras/TensorFlow.",
+      "highlights": [
+        "Operador no controle: risco, execução e auditoria visíveis no painel",
+        "Replay, backfill, radar, labeler e ciclo de treino no core",
+        "Source-available sob PolyForm Noncommercial"
+      ],
+      "stack": [
+        "Python",
+        "FastAPI",
+        "Next.js",
+        "Bybit V5",
+        "TensorFlow"
+      ]
+    },
+    {
+      "name": "lhn-android-apps",
+      "cat": "quant",
+      "lang": "Kotlin",
+      "featured": true,
+      "ci": "ci.yml",
+      "created": "2026-11-17",
+      "title": "LHN Android Apps",
+      "summary": "Dois apps Android nativos do ecossistema LHN: LHN Finanças (carteira offline-first com simuladores) e LHN Mirror (painel remoto do terminal LHN na rede local).",
+      "highlights": [
+        "Carteira com B3, exterior, FIIs, Tesouro Direto e cripto",
+        "Simuladores FIRE, juros compostos, comprar ou alugar e DARF",
+        "Mirror com biometria, WorkManager e descoberta automática do servidor"
+      ],
+      "stack": [
+        "Kotlin",
+        "Jetpack Compose",
+        "Room",
+        "MVI",
+        "WebSocket"
+      ]
+    },
+    {
+      "name": "ultra-low-latency-order-book-engine",
+      "cat": "quant",
+      "lang": "C++",
+      "featured": true,
+      "ci": "ci.yml",
+      "license": "MIT",
+      "created": "2026-05-26",
+      "title": "Order Book Engine",
+      "summary": "Motor de matching em C++20 com prioridade preço-tempo, cinco tipos de ordem, replay de sessões em CSV e benchmark de latência por operação. Só usa a biblioteca padrão.",
+      "highlights": [
+        "Prioridade preço-tempo; o agressor executa ao preço do maker",
+        "Replay determinístico de sessões em CSV",
+        "Benchmark de latência por operação"
+      ],
+      "stack": [
+        "C++20",
+        "CMake",
+        "CTest"
+      ]
+    },
+    {
+      "name": "avx512-options-pricing-engine",
+      "cat": "quant",
+      "lang": "C++",
+      "featured": true,
+      "ci": "ci.yml",
+      "license": "MIT",
+      "created": "2026-05-26",
+      "title": "AVX-512 Options Pricing",
+      "summary": "Precificação de opções europeias em C++20: Black-Scholes-Merton com gregas e volatilidade implícita, kernel AVX-512 que precifica 8 opções por instrução e Monte Carlo multi-thread.",
+      "highlights": [
+        "exp, log e erfc vetoriais próprios, sem SVML",
+        "Monte Carlo com variáveis antitéticas",
+        "Sem dependências externas e sem GPU"
+      ],
+      "stack": [
+        "C++20",
+        "AVX-512",
+        "SIMD",
+        "Monte Carlo"
+      ]
+    },
+    {
+      "name": "smc-liquidity-scanner",
+      "cat": "quant",
+      "lang": "Python",
+      "ci": "ci.yml",
+      "license": "MIT",
+      "created": "2026-05-26",
+      "title": "SMC Liquidity Scanner",
+      "summary": "Lê velas OHLC (CSV ou API pública da Bybit) e marca os conceitos de Smart Money: BOS, CHoCH, fair value gaps, order blocks, pools de liquidez e zona premium/discount.",
+      "highlights": [
+        "FVG com acompanhamento de mitigação e preenchimento",
+        "Detecção de varreduras de liquidez",
+        "Saída em terminal, JSON ou gráfico HTML"
+      ],
+      "stack": [
+        "Python",
+        "Bybit API",
+        "CLI"
+      ]
+    },
+    {
+      "name": "unified-trading-super-terminal",
+      "cat": "quant",
+      "lang": "Rust",
+      "ci": "ci.yml",
+      "license": "MIT",
+      "created": "2026-05-26",
+      "title": "Unified Trading Terminal",
+      "summary": "Terminal de trading no console (TUI) com cotações ao vivo, gráfico, carteira com P&L, painel de risco com VaR histórico, limites, kill switch e paper trading.",
+      "highlights": [
+        "Dados públicos da Binance, sem chave de API",
+        "Simulador determinístico para testes",
+        "VaR histórico e kill switch"
+      ],
+      "stack": [
+        "Rust",
+        "Ratatui",
+        "Binance API"
+      ]
+    },
+    {
+      "name": "dark-pool-market-impact-simulator",
+      "cat": "quant",
+      "lang": "Python",
+      "license": "MIT",
+      "created": "2026-05-26",
+      "title": "Dark Pool Impact Simulator",
+      "summary": "Simula o custo de executar um bloco grande com o modelo Almgren-Chriss, compara TWAP, VWAP e execução em bloco e traça a fronteira eficiente.",
+      "highlights": [
+        "Modelo Almgren-Chriss calibrado com histórico",
+        "Comparativo TWAP / VWAP / block",
+        "Cenários em lote paralelizados com Ray"
+      ],
+      "stack": [
+        "Python",
+        "SciPy",
+        "Ray"
+      ]
+    },
+    {
+      "name": "chaos-engineering-trading-toolkit",
+      "cat": "quant",
+      "lang": "Go",
+      "license": "MIT",
+      "created": "2026-05-26",
+      "title": "Chaos Trading Toolkit",
+      "summary": "Chaos engineering para bots de trading: injeta latência, queda de banco e indisponibilidade de corretora para ver como o sistema se recupera.",
+      "highlights": [
+        "CLI chaosd com experimentos documentados",
+        "Relatórios de recuperação e MTTR",
+        "Integração com a API do Docker"
+      ],
+      "stack": [
+        "Go",
+        "Docker API"
+      ]
+    },
+    {
+      "name": "local-rag-second-mind-vault",
+      "cat": "ai",
+      "lang": "Python",
+      "featured": true,
+      "ci": "ci.yml",
+      "license": "MIT",
+      "created": "2026-05-26",
+      "title": "Second Mind Vault",
+      "summary": "Pergunte aos seus documentos sem mandar nada para a nuvem. Indexa Markdown, texto, HTML e PDF num único SQLite, busca com BM25 + vetores e responde citando os trechos usados.",
+      "highlights": [
+        "Fusão BM25 + vetores por Reciprocal Rank Fusion",
+        "Resposta gerada pelo Ollama local, com citações",
+        "Sem Ollama, devolve os trechos em vez de inventar"
+      ],
+      "stack": [
+        "Python",
+        "SQLite FTS5",
+        "Ollama",
+        "RRF"
+      ]
+    },
+    {
+      "name": "distributed-ai-inference-cluster",
+      "cat": "ai",
+      "lang": "Python",
+      "featured": true,
+      "ci": "ci.yml",
+      "license": "MIT",
+      "created": "2026-05-26",
+      "title": "infergw: Inference Gateway",
+      "summary": "Junta várias máquinas com LLMs (PC com GPU, notebook, servidor vLLM) atrás de um único endereço compatível com a API da OpenAI e manda cada pedido para o worker certo.",
+      "highlights": [
+        "Roteamento por modelo anunciado em /v1/models",
+        "Balanceamento por ocupação, fila e tolerância a falhas",
+        "Funciona com Ollama, vLLM e servidores OpenAI-compatíveis"
+      ],
+      "stack": [
+        "Python",
+        "OpenAI API",
+        "vLLM",
+        "Ollama"
+      ]
+    },
+    {
+      "name": "loteria-ia",
+      "cat": "ai",
+      "lang": "Python",
+      "ci": "quality.yml",
+      "created": "2026-11-17",
+      "title": "Loteria IA",
+      "summary": "Explorador local das nove loterias numéricas da CAIXA: histórico oficial, estatísticas, modelos experimentais em TensorFlow e explicações em português por LLM local. Sem promessa de previsão.",
+      "highlights": [
+        "Modelo só é promovido se não piorar contra a baseline",
+        "Chance matemática exata embaixo de cada aposta",
+        "Docker Compose com FastAPI, React e Ollama"
+      ],
+      "stack": [
+        "Python",
+        "TensorFlow",
+        "FastAPI",
+        "React",
+        "Ollama"
+      ]
+    },
+    {
+      "name": "cognitive-bias-hallucination-trap",
+      "cat": "ai",
+      "lang": "Python",
+      "license": "MIT",
+      "created": "2026-05-26",
+      "title": "Hallucination Trap",
+      "summary": "Suíte de testes adversariais para LLMs: 48 cenários de viés e alucinação, com matriz de confusão por categoria e resultados exportáveis.",
+      "highlights": [
+        "48 traps categorizados",
+        "Integração com vLLM OpenAI-compatible",
+        "Gate de release e comparação de temperaturas"
+      ],
+      "stack": [
+        "Python",
+        "LangChain",
+        "vLLM"
+      ]
+    },
+    {
+      "name": "voice-cloning-tts-api-gateway",
+      "cat": "ai",
+      "lang": "Python",
+      "license": "MIT",
+      "created": "2026-05-26",
+      "title": "Voice Cloning TTS Gateway",
+      "summary": "API self-hosted de síntese e clonagem de voz: registro de vozes por WAV de referência, síntese síncrona ou em lote e workers horizontais.",
+      "highlights": [
+        "Swagger UI interativo",
+        "Workers escaláveis com Celery + Redis",
+        "Guia de fine-tuning e qualidade de áudio"
+      ],
+      "stack": [
+        "Python",
+        "FastAPI",
+        "Celery",
+        "Redis",
+        "XTTS"
+      ]
+    },
+    {
+      "name": "viral-trend-sentiment-predictor",
+      "cat": "ai",
+      "lang": "Python",
+      "license": "MIT",
+      "created": "2026-05-26",
+      "title": "Viral Trend Predictor",
+      "summary": "Cruza volume, sentimento e histórico para achar tendências cedo: coleta em Go, features em PostgreSQL e Gradient Boosting com validação temporal.",
+      "highlights": [
+        "Séries temporais de views e sentimento",
+        "Split temporal, sem vazamento de futuro",
+        "Ranking diário de nichos e alertas de breakout"
+      ],
+      "stack": [
+        "Go",
+        "Python",
+        "scikit-learn",
+        "PostgreSQL"
+      ]
+    },
+    {
+      "name": "CortaLive-Basico",
+      "cat": "media",
+      "lang": "Python",
+      "featured": true,
+      "new": true,
+      "license": "MIT",
+      "created": "2026-11-19",
+      "demo": "https://srsatriano.github.io/CortaLive-Basico/",
+      "download": "https://github.com/SrSatriano/CortaLive-Basico/releases/latest",
+      "title": "CortaLive Básico",
+      "summary": "Transforma um vídeo ou uma live gravada em cortes verticais para TikTok, Shorts e Reels: acha os picos de áudio, transcreve no PC com Whisper e a IA escolhe e dá nota aos melhores momentos.",
+      "highlights": [
+        "Corte 1080x1920 com webcam em cima e jogo embaixo, legenda palavra a palavra e capa",
+        "Texto do post pronto, com título de gancho, hashtags e crédito ao criador",
+        "Roda no Windows, sem placa de vídeo, com a sua chave (Gemini, Claude, OpenAI ou Vertex)"
+      ],
+      "stack": [
+        "Python",
+        "FFmpeg",
+        "Whisper",
+        "Gemini",
+        "Claude"
+      ]
+    },
+    {
+      "name": "CortaLive-Pro",
+      "cat": "media",
+      "lang": "Instalador",
+      "no_lang": true,
+      "featured": true,
+      "new": true,
+      "license": "Comercial",
+      "created": "2026-11-19",
+      "demo": "https://srsatriano.github.io/CortaLive-Basico/",
+      "download": "https://github.com/SrSatriano/CortaLive-Pro/releases/latest",
+      "title": "CortaLive Pro",
+      "summary": "A versão completa do CortaLive (código fechado; aqui ficam os instaladores): grava lives sozinho, usa o chat ao vivo para achar momentos, corta em até 4K e publica nas redes.",
+      "highlights": [
+        "Grava lives da Twitch, YouTube e Kick automaticamente",
+        "Publica e agenda no TikTok, YouTube Shorts e Instagram Reels",
+        "Painel com agenda, métricas das contas e análise; ativação por licença"
+      ],
+      "stack": [
+        "Windows",
+        "4K",
+        "Twitch",
+        "YouTube",
+        "Kick"
+      ]
+    },
+    {
+      "name": "videoos",
+      "cat": "media",
+      "lang": "Python",
+      "featured": true,
+      "ci": "ci.yml",
+      "created": "2026-11-17",
+      "title": "VideoOS",
+      "summary": "Editor local-first de vídeos curtos verticais: importa, aplica templates em lote, revisa renders FFmpeg e gera pacotes de publicação para Reels, TikTok e Shorts.",
+      "highlights": [
+        "Worker Python + FFmpeg/FFprobe",
+        "Backend FastAPI com SQLite WAL",
+        "Frontend React/Vite, Electron opcional, Docker Compose"
+      ],
+      "stack": [
+        "Python",
+        "FastAPI",
+        "FFmpeg",
+        "React",
+        "Docker"
+      ]
+    },
+    {
+      "name": "multi-channel-analytics-dashboard",
+      "cat": "media",
+      "lang": "TypeScript",
+      "ci": "ci.yml",
+      "license": "MIT",
+      "created": "2026-05-26",
+      "title": "Multi-Channel Analytics",
+      "summary": "Painel para quem tem mais de um canal no YouTube: importa o CSV do YouTube Studio e compara RPM, receita, CTR, retenção e ranking de vídeos lado a lado.",
+      "highlights": [
+        "Dados ficam só no navegador",
+        "Site estático, sem servidor e sem chave de API",
+        "Gráficos de receita, CTR e retenção"
+      ],
+      "stack": [
+        "Next.js",
+        "TypeScript",
+        "Recharts"
+      ]
+    },
+    {
+      "name": "omniforge-studio",
+      "cat": "media",
+      "lang": "Python",
+      "ci": "ci.yml",
+      "created": "2026-11-17",
+      "title": "OmniForge Studio",
+      "summary": "Estúdio desktop para Windows que produz livros para Amazon KDP (PDF de impressão, capa, lombada, royalties), com TTS e provedores de IA plugáveis.",
+      "highlights": [
+        "UI PySide6 que não trava: QThreadPool + ProcessPool",
+        "Chaves no DPAPI do Windows com AES-GCM",
+        "Mais de 1.000 testes com pytest"
+      ],
+      "stack": [
+        "Python",
+        "PySide6",
+        "OpenAI",
+        "Gemini"
+      ]
+    },
+    {
+      "name": "autonomous-short-form-video-pipeline",
+      "cat": "media",
+      "lang": "Python",
+      "license": "MIT",
+      "created": "2026-05-26",
+      "title": "Short-Form Video Pipeline",
+      "summary": "Pipeline configurável em YAML que gera vídeos 9:16 prontos para publicar: roteiro, áudio, legendas com tempo por palavra e render acelerado por hardware.",
+      "highlights": [
+        "Legendas ASS com word timing (Whisper)",
+        "NVENC, VideoToolbox e AMF",
+        "Métricas por estágio"
+      ],
+      "stack": [
+        "Python",
+        "FFmpeg",
+        "Whisper",
+        "LLM"
+      ]
+    },
+    {
+      "name": "algorithmic-lofi-audio-generator",
+      "cat": "media",
+      "lang": "Python",
+      "license": "MIT",
+      "created": "2026-05-26",
+      "title": "Lo-fi Audio Generator",
+      "summary": "Gera trilhas lo-fi alinhadas aos cortes do vídeo: detecta cenas, gera música por segmento com BPM coerente e mixa o resultado.",
+      "highlights": [
+        "Detecção de cenas",
+        "Geração por segmento com MusicGen",
+        "CLI vídeo → áudio"
+      ],
+      "stack": [
+        "Python",
+        "PyTorch",
+        "MusicGen"
+      ]
+    },
+    {
+      "name": "realtime-deepfake-streaming-bridge",
+      "cat": "media",
+      "lang": "C++",
+      "license": "MIT",
+      "created": "2026-05-26",
+      "title": "Realtime Face FX Bridge",
+      "summary": "Pipeline CUDA FP16 para efeitos de face em tempo real, com saída para câmera virtual e OBS. Também serve como base para pesquisa de detecção de deepfake.",
+      "highlights": [
+        "Pré-processamento em CUDA",
+        "Inferência FP16",
+        "Guia de VRAM e integração OBS"
+      ],
+      "stack": [
+        "C++",
+        "CUDA",
+        "OpenCV"
+      ]
+    },
+    {
+      "name": "satriano-studio",
+      "cat": "media",
+      "lang": "HTML",
+      "demo": "https://srsatriano.github.io/satriano-studio/",
+      "created": "2026-10-29",
+      "title": "Satriano Studio",
+      "summary": "Site público da minha ferramenta pessoal de publicação de vídeos (YouTube Data API), com política de privacidade e termos de uso.",
+      "highlights": [
+        "Site estático no GitHub Pages",
+        "Páginas de privacidade e termos",
+        "HTML + CSS sem dependências"
+      ],
+      "stack": [
+        "HTML",
+        "CSS",
+        "GitHub Pages"
+      ]
+    },
+    {
+      "name": "fiscal-data-ocr-engine",
+      "cat": "product",
+      "lang": "Python",
+      "featured": true,
+      "ci": "ci.yml",
+      "license": "MIT",
+      "created": "2026-05-26",
+      "title": "Fiscal Data OCR",
+      "summary": "Extrai, valida e categoriza notas fiscais brasileiras: XML da NF-e/NFC-e, DANFE em PDF, nota de serviço em texto e fotos de cupom. Processa uma pasta e gera planilha por categoria.",
+      "highlights": [
+        "Leitura completa da NF-e 4.00 (NCM, CFOP, itens)",
+        "OCR opcional para cupons fotografados",
+        "Planilha com total gasto por categoria"
+      ],
+      "stack": [
+        "Python",
+        "OCR",
+        "XML",
+        "PDF"
+      ]
+    },
+    {
+      "name": "tax-loss-harvesting-engine",
+      "cat": "product",
+      "lang": "JavaScript",
+      "ci": "ci.yml",
+      "license": "MIT",
+      "created": "2026-05-26",
+      "title": "Tax-Loss Harvesting B3",
+      "summary": "Calcula o IR mensal de operações na B3 (ações, ETFs, FIIs e day trade) a partir das notas e simula quais posições com prejuízo vale vender para pagar menos imposto.",
+      "highlights": [
+        "Regras da Lei 11.033/2004 e IN RFB 1.585/2015",
+        "Isenção de R$ 20 mil e compensação de prejuízo",
+        "Simulação, não aconselhamento tributário"
+      ],
+      "stack": [
+        "Node.js",
+        "JavaScript"
+      ]
+    },
+    {
+      "name": "vagas-alerta",
+      "cat": "product",
+      "lang": "Python",
+      "ci": "ci.yml",
+      "created": "2026-11-17",
+      "title": "Vagas Alerta",
+      "summary": "Agregador local-first de vagas: coleta LinkedIn, Indeed, Glassdoor, Gupy, Vagas.com e páginas de companhias aéreas, remove duplicatas e avisa no Telegram só o que bate com seus filtros.",
+      "highlights": [
+        "Deduplicação difusa com RapidFuzz",
+        "SQLite + FTS5, sem servidor de banco",
+        "Painel Next.js 15 e API FastAPI com worker agendado"
+      ],
+      "stack": [
+        "Python",
+        "FastAPI",
+        "SQLite FTS5",
+        "Next.js",
+        "Telegram"
+      ],
+      "featured": true
+    },
+    {
+      "name": "rotanorte",
+      "cat": "product",
+      "lang": "Python",
+      "ci": "ci.yml",
+      "created": "2026-11-17",
+      "title": "RotaNorte",
+      "summary": "Busca vagas com visto para EUA e Canadá em fontes oficiais (DOL, Job Bank, LMIA), dá nota de 0 a 100 para o seu perfil, gera currículo em inglês e detecta golpes.",
+      "highlights": [
+        "Listas LMIA, AIP e green card (PERM)",
+        "Currículo e carta em inglês por vaga, em PDF",
+        "Plano de ação e avisos no Telegram"
+      ],
+      "stack": [
+        "Python",
+        "SQLite",
+        "Telegram"
+      ]
+    },
+    {
+      "name": "family-treasury-dao-tracker",
+      "cat": "product",
+      "lang": "JavaScript",
+      "license": "MIT",
+      "created": "2026-05-26",
+      "title": "Family Treasury",
+      "summary": "Tesouraria familiar: cofres com metas, aportes e projeção com juros compostos, para dar visibilidade conjunta a objetivos de longo prazo.",
+      "highlights": [
+        "API REST de cofres e aportes",
+        "Projeção de valor futuro documentada",
+        "SQLite zero-config"
+      ],
+      "stack": [
+        "React",
+        "Vite",
+        "Express",
+        "SQLite"
+      ]
+    },
+    {
+      "name": "enterprise-b2b-saas-boilerplate",
+      "cat": "product",
+      "lang": "TypeScript",
+      "license": "MIT",
+      "created": "2026-05-26",
+      "title": "B2B SaaS Boilerplate",
+      "summary": "Base para SaaS B2B com o que todo projeto repete: autenticação, isolamento multi-tenant com RLS, rotas protegidas e cobrança via webhooks Stripe.",
+      "highlights": [
+        "RLS multi-tenant no Supabase",
+        "Middleware Next.js para rotas protegidas",
+        "Migrations SQL e webhooks Stripe"
+      ],
+      "stack": [
+        "Next.js",
+        "Supabase",
+        "Stripe",
+        "TypeScript"
+      ]
+    },
+    {
+      "name": "tokenomics-staking-protocol",
+      "cat": "web3",
+      "lang": "Solidity",
+      "license": "MIT",
+      "created": "2026-05-26",
+      "title": "Tokenomics & Staking",
+      "summary": "Token ERC-20 com cap e burn e um StakingPool protegido contra reentrância, com testes Hardhat e deploy em testnet.",
+      "highlights": [
+        "Cobertura de testes acima de 90%",
+        "Deploy em Polygon Amoy",
+        "Tokenomics documentada"
+      ],
+      "stack": [
+        "Solidity",
+        "Hardhat",
+        "OpenZeppelin",
+        "React"
+      ]
+    },
+    {
+      "name": "identity-vault-zk-proofs",
+      "cat": "web3",
+      "lang": "Solidity",
+      "license": "MIT",
+      "created": "2026-05-26",
+      "title": "Identity Vault ZK",
+      "summary": "Prova de saldo mínimo e KYC seletivo sem expor dados: circuitos Groth16 em Circom, verificador em contrato e CLI de prova e verificação.",
+      "highlights": [
+        "Circuito balance.circom",
+        "Contrato verificador on-chain",
+        "Deploy em Sepolia"
+      ],
+      "stack": [
+        "Circom",
+        "SnarkJS",
+        "Solidity",
+        "Hardhat"
+      ]
+    },
+    {
+      "name": "p2p-orderbook-gossip",
+      "cat": "web3",
+      "lang": "Rust",
+      "license": "MIT",
+      "created": "2026-05-26",
+      "title": "P2P Order Book Gossip",
+      "summary": "Order book descentralizado: réplicas eventualmente consistentes que trocam ordens por GossipSub e resolvem conflitos por nonce.",
+      "highlights": [
+        "GossipSub sobre libp2p",
+        "Rate limit contra DDoS",
+        "CLI para subir vários nós"
+      ],
+      "stack": [
+        "Rust",
+        "libp2p"
+      ]
+    },
+    {
+      "name": "honeypot-rugpull-analyzer",
+      "cat": "web3",
+      "lang": "Python",
+      "license": "MIT",
+      "created": "2026-05-26",
+      "title": "Honeypot & Rug Pull Analyzer",
+      "summary": "Análise estática de contratos de token antes do swap: heurísticas próprias + Slither, com relatório Markdown e tabela de severidade.",
+      "highlights": [
+        "Mais de 10 detectores",
+        "CLI por endereço de contrato",
+        "Menos de 8 s por análise na Ethereum"
+      ],
+      "stack": [
+        "Python",
+        "Slither",
+        "Web3.py"
+      ]
+    },
+    {
+      "name": "mempool-arbitrage-mev-bot",
+      "cat": "web3",
+      "lang": "Rust",
+      "license": "MIT",
+      "created": "2026-05-26",
+      "title": "Mempool MEV Lab",
+      "summary": "Laboratório educacional de MEV: escuta transações pendentes, avalia lucro teórico de arbitragem e roda em testnet ou simulador local.",
+      "highlights": [
+        "Listener de transações pendentes",
+        "Simulador local de mempool",
+        "Avisos éticos e limitações documentados"
+      ],
+      "stack": [
+        "Rust",
+        "Tokio",
+        "Web3"
+      ]
+    },
+    {
+      "name": "cross-border-ledger-fabric",
+      "cat": "web3",
+      "lang": "Go",
+      "license": "MIT",
+      "created": "2026-05-26",
+      "title": "Cross-Border Ledger",
+      "summary": "Ledger permissionado para faturas internacionais: canais privados, chaincode de registro e políticas de endosso entre organizações.",
+      "highlights": [
+        "Chaincode de invoice em Go",
+        "Canais privados multi-org",
+        "Trilha imutável e auditável"
+      ],
+      "stack": [
+        "Hyperledger Fabric",
+        "Go",
+        "Docker"
+      ]
+    },
+    {
+      "name": "high-compression-log-router",
+      "cat": "infra",
+      "lang": "Rust",
+      "featured": true,
+      "ci": "ci.yml",
+      "license": "MIT",
+      "created": "2026-05-26",
+      "title": "logroute",
+      "summary": "Recebe logs JSON por TCP, HTTP, arquivo ou stdin, separa por regras e grava cada destino em segmentos Zstd com rotação. Depois você consulta os segmentos pela linha de comando.",
+      "highlights": [
+        "Regras por nível, campo, texto ou regex",
+        "Segmentos Zstd com rotação por tamanho e idade",
+        "Consulta com filtro de tempo e nível"
+      ],
+      "stack": [
+        "Rust",
+        "Zstd",
+        "CLI"
+      ]
+    },
+    {
+      "name": "ebpf-latency-tracer-financial",
+      "cat": "infra",
+      "lang": "Python",
+      "license": "MIT",
+      "created": "2026-05-26",
+      "title": "eBPF Latency Tracer",
+      "summary": "Mede latência de rede no kernel sem o custo do tcpdump: histogramas em maps BPF exportados para Prometheus e Grafana.",
+      "highlights": [
+        "Histogramas agregados no kernel",
+        "Loader em Python",
+        "Dashboard Grafana + Docker Compose"
+      ],
+      "stack": [
+        "eBPF (C)",
+        "Python",
+        "Prometheus",
+        "Grafana"
+      ]
+    },
+    {
+      "name": "gitops-infra-state-reconciler",
+      "cat": "infra",
+      "lang": "Go",
+      "license": "MIT",
+      "created": "2026-05-26",
+      "title": "GitOps Reconciler",
+      "summary": "Detecta quando um servidor diverge do Git: webhook no push e loop de reconciliação comparando hash de estado, com hooks Ansible.",
+      "highlights": [
+        "Detector de divergência por hash",
+        "Webhook Git + loop configurável",
+        "Logs estruturados"
+      ],
+      "stack": [
+        "Go",
+        "Webhooks",
+        "Ansible"
+      ]
+    },
+    {
+      "name": "hypervisor-ai-isolation",
+      "cat": "infra",
+      "lang": "Rust",
+      "license": "MIT",
+      "created": "2026-05-26",
+      "title": "Hypervisor AI Isolation",
+      "summary": "Isola agentes de IA em máquinas virtuais sem rede por padrão, para que tool-calling não exfiltre dados do host. Modelo de ameaças documentado.",
+      "highlights": [
+        "Scaffold VMX/EPT",
+        "Scripts QEMU/KVM",
+        "Roadmap de hardening"
+      ],
+      "stack": [
+        "Rust",
+        "QEMU/KVM",
+        "VT-x"
+      ]
+    },
+    {
+      "name": "zero-to-hero-workstation-provisioner",
+      "cat": "infra",
+      "lang": "Shell",
+      "license": "MIT",
+      "created": "2026-05-26",
+      "title": "Workstation Provisioner",
+      "summary": "Playbook Ansible idempotente que transforma uma máquina nova em estação de HFT/ML: NVIDIA, Docker, C++, Python e Node, também em WSL2.",
+      "highlights": [
+        "Roles modulares",
+        "group_vars customizável",
+        "Compatível com WSL2"
+      ],
+      "stack": [
+        "Ansible",
+        "Bash"
+      ]
+    },
+    {
+      "name": "portfolio-matheus-satriano",
+      "cat": "origins",
+      "lang": "TypeScript",
+      "demo": "https://srsatriano.github.io/portfolio-matheus-satriano/",
+      "created": "2026-05-27",
+      "title": "Portfólio",
+      "summary": "Site em Next.js que reúne o LHN e os módulos públicos, com estética de dossiê técnico, painéis de arquitetura e capítulos interativos.",
+      "highlights": [
+        "Campos visuais gerados em código",
+        "Sem vídeos de fundo",
+        "Publicado no GitHub Pages"
+      ],
+      "stack": [
+        "Next.js",
+        "TypeScript",
+        "GitHub Pages"
+      ]
+    },
+    {
+      "name": "IA-Financeira",
+      "cat": "origins",
+      "lang": "Python",
+      "created": "2023-06-23",
+      "title": "IA Financeira",
+      "summary": "Um dos meus primeiros projetos: análise de dados históricos, modelos de previsão e gráficos de velas numa interface desktop.",
+      "highlights": [
+        "Dados via yfinance",
+        "Modelos com scikit-learn e TensorFlow",
+        "Interface PyQt5 com mplfinance"
+      ],
+      "stack": [
+        "Python",
+        "TensorFlow",
+        "PyQt5"
+      ]
+    },
+    {
+      "name": "PersonalAI",
+      "cat": "origins",
+      "lang": "Python",
+      "license": "MIT",
+      "created": "2023-06-20",
+      "title": "PersonalAI",
+      "summary": "Chatbot pessoal com GPT-2: guarda perguntas e respostas em SQLite e pesquisa na web quando não sabe responder.",
+      "highlights": [
+        "Respostas com GPT-2 (transformers)",
+        "Memória em SQLite",
+        "Interface tkinter"
+      ],
+      "stack": [
+        "Python",
+        "transformers",
+        "SQLite"
+      ]
+    },
+    {
+      "name": "calculadora-de-notas",
+      "cat": "origins",
+      "lang": "Java",
+      "created": "2023-06-15",
+      "title": "Calculadora de Notas",
+      "summary": "Calculadora de média ponderada para o semestre, com até seis notas e pesos, em duas versões: Java desktop e Python com tkinter.",
+      "highlights": [
+        "Até 6 notas com pesos",
+        "Versão Java",
+        "Versão Python/tkinter"
+      ],
+      "stack": [
+        "Java",
+        "Python"
+      ]
+    },
+    {
+      "name": "Python_Senac_RIo_On",
+      "cat": "origins",
+      "lang": "Python",
+      "created": "2025-02-03",
+      "title": "Python Senac Rio On",
+      "summary": "Exercícios e códigos das aulas do curso de Python do Senac Rio, organizados por aula.",
+      "highlights": [
+        "Pastas por aula",
+        "Exercícios de Python 3",
+        "Registro de estudo"
+      ],
+      "stack": [
+        "Python"
+      ]
+    }
+  ]
+}
